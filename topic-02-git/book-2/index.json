@@ -1,0 +1,89 @@
+
+
+
+  {
+  
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "Lab 02 Advanced",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>Expand on git branching &amp; merging features with more advanced git commands and concepts</p>",
+  "folder" : "book-2",
+  "link" : "index.html",
+  "los": [
+   ]
+,
+  "chapters" : [
+  
+    {
+    "title": "# Objectives",
+    "shortTitle": "Lab 02 Advanced",
+    "contentMd" : "# Objectives\n\nExpand on git branching & merging features with more advanced git commands and concepts"
+    },
+  
+    {
+    "title": "# (Recap) Saving Changes and Branching",
+    "shortTitle": "01",
+    "contentMd" : "# (Recap) Saving Changes and Branching\n\n## Saving\n\nSaving changes is a two-step process in Git:\n\n```bash\n# Stages changes to the staging area\ngit add <files>\n\n# Commits a snapshot of changes to the local repo\ngit commit\n```\n\n## Adding\n\n* Adds changes to the staging area\n* Does not really affect the working tree\n* Changes are not recorded until committed\n\n```bash\n# Add just these file(s)\ngit add app.js\n\n# Add all changed files in this directory and sub-dirs\ngit add . \n\n# Glob and stage a pattern of files\ngit add **/*.js\n\n# Unstage the changes to app.js\ngit reset app.js\n```\n\n## Committing\n\n* Commits the staged snapshot to the local repository\n* Include a meaningful commit message\n* Logically group your changes into separate commits\n\n```bash\n# Commits the staged snapshot - will open editor for a message\ngit commit\n\n# Commits with a message\ngit commit -m \"Make a meaningful change\"\n```\n\nTwofer - commit and add in one command:\n\n```bash\n# Stage & commit all changed files with a message\ngit commit -am \"FH-12345 - My files on disk are perfect\"\n```\n\n## Branching\n\nA branch in git is simply a reference to a commit\n\n```bash\n# List all local branches\ngit branch\n\n# Create a new branch locally\ngit branch mynewbranch [myoptionalbasebranch]\n\n# What commit is a branch pointing at?\ngit rev-parse mynewbranch\n\n# What commits are on a branch?\ngit log mynewbranch [--pretty --graph --oneline --decorate]\n\n# What branches point at a particular commit?\ngit branch --points-at e29b7ee\n\n# Delete a branch\ngit branch -d mynewbranch\n\n# Really delete a branch, even if it has changes that aren't on any other branches\ngit branch -D mynewbranch\n```\n\nThere are also \"remote-tracking\" branches\nThese are read-only copies of what is on a \"remote\", at the time that we last \"fetched\" (updated the information we store locally about branches on the remote).\n\n```bash\n# Get new information from all remotes\ngit remote update [--prune] # or: git fetch --all [--prune]\n\n# List all remote-tracking branches\ngit branch -r\n\n# List all branches (local and remote-tracking)\ngit branch -a\n\n# Track a remote branch\ngit branch [branchname] -u origin/anybranch\n\n# Now status will show the relationship with\ngit status [-sb]\nstdout: \"Your branch is ahead of 'origin/anybranch' by 3 commits\"\n\n# Delete a branch from a remote\ngit push origin --delete mybranchname\n```"
+    },
+  
+    {
+    "title": "# Rewriting History",
+    "shortTitle": "02",
+    "contentMd" : "# Rewriting History\n\n## Prerequisites\n\n* Git (2.x)\n* (Optional) hub - https://github.com/github/hub\n* Fork the repository from https://github.com/feedhenry/git-tutorial\n\n\n```bash\n# Clone the forked repository\ngit clone git@github.com:<github_username>/git-tutorial.git\n```\n\n## Overview\n\nWhy rewrite history?\n\n* Git is not only a source control tool, it is also a communication tool\n    * Order of commits, logical grouping, good commit messages help to communicate changes\n    * Think of the person reviewing your PRs as a potential axe-murderer. Axe murderers hate fix-up commits.\n* Golden rule: **Never** rewrite history on shared/public trees\n\n## Rebasing\n\nRebasing and Merging are two methods that achieve the same goal - the integration of changes from one branch into another branch\n\n\n![rebase on master](img/01.gif)\n![rebase on feature](img/02.gif)\n\n### Practical\n\n```bash\ncd git-tutorial # From earlier\ngit fetch\ngit checkout rebase\n\n# The rebase branch was branched from master a while ago\n# It's out of date (master has moved on)\n# And there's bad commits in our history that we're going to fixup\ngit log --pretty=oneline\n\n# First, lets interactively rebase our last 4 commits\ngit rebase -i HEAD~4 # Note the lack of a branch\n\n# Fix up the commits - think about re-ordering or (s)quashing\n# the version bumps and (r)eword the commit messages. \n# Also, delete commits that are of no value\ngit rebase origin/master\n\n# Alternatively:\n# We can do both a history rewrite and a rebase via:\ngit rebase -i origin/master\n```"
+    },
+  
+    {
+    "title": "# Stashing",
+    "shortTitle": "03",
+    "contentMd" : "# Stashing\n\nMove changes in a dirty workspace away to the side\n\n```bash\n# You have a dirty workspace\n$ git status -s\n D .eslintrc.json\n?? .eslintrc.yaml\n\n# \"stash\" those changes\n$ git stash save \"Experimental work with eslint\"\nSaved working directory and index state On master: Experimental work with eslint\nHEAD is now at 645ba47 Merge pull request #884 from...\n\n# See what stashes you have in this repository\n$ git stash list\nstash@{0}: On master: Experimental work with eslint\nstash@{1}: kubernetes client test stuff\nstash@{2}: WIP on master: d09a007 Merge pull request #768 from...\n\n# Your workspace is now clean...is it?\n$ git status -s\n?? .eslintrc.yaml # this file isn't tracked by git yet, so not stashed by default\n\n# Restore top/first stash (stash@{0}) & remove it from the list\n$ git stash pop # == apply && drop\n\n# Back to normal\n$ git status -s\n D .eslintrc.json\n?? .eslintrc.yaml\n\n# 'save' is the default stash action -- needed if you want to include a message\n$ git stash save -u \"Stash all including untracked\"\n\n# Bring it (or another stash) back\n$ git stash apply stash@{0}\n\n# Remove the stash if it's no longer needed\ngit stash drop stash@{0}\n\n# Or make a new branch & restore your changes there\ngit stash branch <branchname> [stash@<revision>]\n```"
+    },
+  
+    {
+    "title": "# Tagging",
+    "shortTitle": "04",
+    "contentMd" : "# Tagging\n\n* There are two types of git tags - annotated and lightweight\n* We’re going to only cover lightweight tags today (you’ll see these more often)\n* A lightweight tag is like a branch that does not change\n  * Pointer to a specific git-ref.\n  * Unlike annotated tags, it is not a full object in the Git DB (not annotated, not-checksummed, not signed, no metadata about the creator)\n* Lightweight tags - under the covers\n\n```bash\n# LW tags are files on disk with a pointer to a commit\nls .git/refs/tags/\n\n# Cat to reveal pointer to a commit\ncat git/refs/tags/v99.0.0\n\n# Show this commit\ngit show 659220 \n```\n\nCreating a tag\n\n```bash\n# On a branch or any kind of git-ref\ngit tag v1.2.3-your-name\n\n# Check filesystem (ls .git/refs/tags)\n# Git does not push tags by default to a remote\n# Or `git push --tags`\ngit push origin v1.2.3-your-name\n\n# Checkout a tag\ngit checkout v99.0.0\n\n# Create a branch from a tag\ngit checkout -b version-nine-nine v99.0.0\n\n# Delete tags /!\\ Careful now  /!\\\n# Local only\ngit tag -d v99.0.0\n\n# Delete from remote\ngit push origin :refs/tags/v99.0.0\n\n# A little bit about annotated tags\ngit tag -s v0.99.0-annotated -m \"my tag v0.99.0-annotated\"\ngit show v0.99.0-annotated\n```\n"
+    },
+  
+    {
+    "title": "# Cherry Picking",
+    "shortTitle": "05",
+    "contentMd" : "# Cherry Picking\n\nApply the changes introduced by some existing commits\n\nOur main use-case for git-cherry-pick is for taking some bugfix commits from one branch, and applying them to another (e.g. a release branch and master)\n\n```bash\n# Ensure that you're on the branch you want to copy commits to\n# and the working directory is clean\n$ git status\nOn branch cp-example\nnothing to commit, working tree clean\n\n# Bring a commit from a different branch over\ngit cherry-pick dea2da\n\n# Notice that the changes, author details, and commit message are the same\n# But the commit sha1 is different (and maybe the tree object)\n$ git log -1 # or git show\ncommit b2d900443cb628f8d5c6accc271e7b66aaadb9ca\nAuthor: Jason Madigan <jason@jasonmadigan.com>\nDate:   Thu Dec 1 16:42:17 2016 +0000\n\n    name change\n```"
+    },
+  
+    {
+    "title": "# Hooks",
+    "shortTitle": "06",
+    "contentMd" : "# Hooks\n\nDo something before or after a particular action\n\n* Server-side hooks: we can't use them because of Github. Use webhooks instead\n* Client-side hooks:\n  * 'git am' hooks: we don't use 'am', so we don't care\n  * Commit:\n    * post-commit\n    * commit-msg\n    * prepare-commit-msg\n    * pre-commit\n  * Others\n    * pre-rebase\n    * post-checkout\n    * post-merge\n    * pre-push\n    * pre-auto-gc\n    * post-rewrite\n\n```bash\n# everything you need to know about each hook\nman githooks\n```\n\n* Hooks are stored in `.git/hooks/` in your repo\n* Hooks can be scripts in any language, and can run any programs available on the system\n\nExample pre-commit hook to lint code, stored in `.git/hooks/pre-commit`\n\n```bash\n#!/usr/bin/bash --login\n\neslint ./lib\n```\n\n"
+    },
+  
+    {
+    "title": "# Config",
+    "shortTitle": "07",
+    "contentMd" : "# Config\n\nConfig is layered: system, global (user), local (repo)\n\n```bash\n# System\ncat /etc/gitconfig\n\n# Global (user)\ncat ~/.gitconfig # or ~/.git/config\n\n# repo-specific\ncat ./.git/config\n```\n\nSet defaults for all your projects in ~/.gitconfig, either by editing the file directly, or by using the config subcommand. E.g.:\n\n```bash\n# Set a sane editor (otherwise uses value from $EDITOR)\n$ git config --global core.editor emacs\n\n# Set a custom commit message template\ngit config --global commit.template ~/.git-commit-template\n```\n\nGerard's current ~/.git-commit-template file: https://git.io/vQJzx\n\nMost interesting is the user's global config\n\n```ini\n[user]\n\tname = Gerard Ryan\n\temail = gerard@ryan.lt\n\tsigningkey = 8A617903604095DC\n\n[core]\n\texcludesfile = ~/.gitignore\n\tquotepath = false\n\tautocrlf = input\n\tsafecrlf = warn\n\teditor = emacsclient -t -a emacs\n\n[hub]\n\tprotocol = ssh\n\n[commit]\n\ttemplate = /home/grdryn/.git-commit-template\n\tgpgsign = true\n\n[gpg]\n\tprogram = gpg2\n```\n\nAliases are really useful\n\n```ini\n[alias]\n\tbr = branch\n\tco = checkout\n\tci = commit -a\n\td = diff --color-words\n\tst = status\n\tlol = log --graph --decorate --all --abbrev-commit --pretty=oneline\n        lg = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative\n\tscrub = !git reset --hard && git clean -fd\n```\n\nLots of other useful aliases and config customization examples here:\n\nhttps://github.com/matthewmccullough/dotfiles/blob/master/gitconfig\n"
+    },
+  
+    {
+    "title": "# Bisecting",
+    "shortTitle": "08",
+    "contentMd" : "# Bisecting\n\n* git bisect helps you figure out when breaking changes were introduced\n* Uses a binary-search between one changeset and another to quickly narrow breakage to a single commit\n\n## Practical\n\nIn the `git-tutorial` repo:\n\n```bash\ngit checkout bisect\n# Our bisect branch is a little ahead of of master (500 commits)\n# At some point, a commit slipped in that means our app doesn't start\n# and our tests fail.\n# Lets use git bisect to find the broken commit\ngit bisect start\n# Step 1 - find a commit where things are working\n# I have no idea, so lets cast a wide net (across 500 commits)\ngit bisect good cddd186 # update to 3.0.0\ngit bisect bad bf0c5b1  # update to 502.0.0\n# Run `npm test` to see if our tests fail\n# If they fail - run `git bisect bad`\n# If they pass - run `git bisect good`\n# When done, reset via `git bisect reset` & patch the bug\n```"
+    },
+  
+    {
+    "title": "# Under the Covers",
+    "shortTitle": "09",
+    "contentMd" : "# Under the Covers\n\n```bash\n$ tree -L 1 ./.git\n./.git\n├── branches\n├── COMMIT_EDITMSG # Text of most recent commit message\n├── config         # Local configuration specific to this repo\n├── description\n├── FETCH_HEAD     # Info about what was fetched from remotes\n├── HEAD           # Special ref that points to current ref in ./git/refs\n├── hooks          # Dir containing scripts that run at specific events\n├── index          # Binary representation of the index/cache/staging area\n├── info           \n├── logs           # Dir containing info used by reflog\n├── objects        # Dir containing all \"objects\" (loose or packed)\n├── ORIG_HEAD\n├── packed-refs    # (compressed)\n├── refs           # Branch, tag, remote, stash info\n└── rr-cache\n```\n\n* The stuff outside the .git directory is the checked-out working directory.\n* Only .git contents (expanded) exist on server: bare repo.\n\n## COMMIT_EDITMSG\n\n`COMMIT_EDITMSG` can be useful with the hub command to create a pull-request on github with a single command\n\n```bash\n# Create a PR against master branch of the repo in the feedhenry org\n# with the contents of the most recent commit message as the description\ngit pull-request -b feedhenry:master -F ./.git/COMMIT_EDITMSG\n```\n\n## Git objects - what are they?\n\n* Blob - Think of blobs as file contents (deflated) with a size & type header.\n* Tree - Trees refer to blobs (and other trees), similar to how a directory points to files (and child directories).\n* Commit - Commits consist of a tree, parent commits, metadata (message, author details, time, etc).\n* Tag - An annotated tag is an object type that points to another object, and contains metadata such as timestamp, tag name, description, tagger and gpgsig. Most commonly refers to a commit.\n\n### Inspecting Objects with git cat-file\n\n```bash\n# What type of object is it?\n$ git cat-file -t $(git rev-parse HEAD)\ncommit\n\n# What size is it (in bytes)?\n$ git cat-file -s e29b7eef219e38d005b1360214322a336a56729e\n1079\n\n# Pretty-print it\n$ git cat-file -p $(git rev-parse HEAD)^\ntree 2320f5bb8cf059571ed69d705ba792c7939296f5\nparent e67aeb6f2a1c521f62106ede0b53f3a30ce57a36\nparent d4c13babe4fb19550455d96cd067a19f745d999e\nauthor Jason Madigan <jmadigan@redhat.com> 1480413570 +0000\ncommitter GitHub <noreply@github.com> 1480413570 +0000\n\nMerge pull request #2 from fheng/readme-updates\n\nREADME updates\n```\n\n### Crazy example with no files or porcelain commands\n\nPorcelain provides a more user-friendly interface to the plumbing\nhttps://git.io/v1Bt5\n\n```bash\n# Create a new branch from master & checkout\ngit co -b ungit master\n\n# Make a new blob object\nblob_sha1=$(echo \"Let's ungit\" | git hash-object -w --stdin)\n\n# Add the blob as a file in the index\ngit update-index --add --cacheinfo 100644 ${blob_sha1} ungit.txt\n\n# Make a tree object from the current index\ntree_sha1=$(git write-tree)\n\n# Make a commit object with the newly-created tree\ncommit_sha1=$(echo \"Ungit all the things\" | git commit-tree -p HEAD ${tree_sha1})\n\n# Update the current branch with that new commit\ngit merge ${commit_sha1}\n\n# WTF, where's my ungit.txt?!\nls && git status\n```\n\n## Reflog - git's safety net\n\nGit commands that change the state of the local repo will write an entry to the reflog\n\n```bash\ngit reflog # git log -g --abbrev-commit --pretty=oneline\na21f4c4 HEAD@{0}: merge a21f4c412fa194021faa859193380a26b54a024d: Fast-forward\nc838b24 HEAD@{1}: merge c838b2447de706f53eaabed16c371abbb6d82b03: Fast-forward\ne29b7ee HEAD@{2}: checkout: moving from cp-conflict-example to ungit\nbf196ea HEAD@{3}: commit (cherry-pick): Bumping version to 2.0.8\ne29b7ee HEAD@{4}: checkout: moving from cp-example to cp-conflict-example\nb2d9004 HEAD@{5}: checkout: moving from master to cp-example\ne29b7ee HEAD@{6}: checkout: moving from cp-example to master\nb2d9004 HEAD@{7}: cherry-pick: name change\ne29b7ee HEAD@{8}: checkout: moving from master to cp-example\ne29b7ee HEAD@{9}: clone: from git@github.com:fheng/git-tutorial.git\n\n# Checkout a previous state\ngit checkout HEAD@{2} # detached head, consider creating a branch here if important\n\n# Reset current branch to an earlier state\ngit reset [--hard] HEAD@{4}\n```"
+    },
+  
+    {
+    "title": "# Links",
+    "shortTitle": "10",
+    "contentMd" : "# Links\n\n* Oh shit - http://ohshitgit.com/\n* Interactive git cheatsheet - http://ndpsoftware.com/git-cheatsheet.html\n* Gitmoji - https://gitmoji.carloscuesta.me/\n* Pro Git (free book) - https://git-scm.com/book/en/v2\n* GitHub resources - https://services.github.com/classnotes/\n* Atlassian Git Tutorials - https://www.atlassian.com/git/tutorials"
+    }
+  
+  ]
+  }
+

@@ -1,0 +1,165 @@
+
+
+
+  {
+  
+  
+    "properties" : {"highlightstyle":"railscasts","slack":"https://wit-hdip-comp-sci.slack.com/messages/C84S2LQSC/","parent":"https://wit-hdip-comp-sci-2019.github.io/","courseurl":"https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite/","credits":"WIT Computing","ects":0,"faPanelicon":"fas fa-users","faColour":"#00838f"},
+  
+  "type" : "course",
+  "title" : " June Onsite ",
+  "img" : "",
+  "videoid" : "",
+  "objectives" : "<p>structure · agenda · schedule · speakers</p>",
+  "folder" : "june-2019-onsite",
+  "link" : "index.html",
+  "los": [
+   ]
+,
+  "topics" : [  {
+    
+  
+    "properties" : {},
+  
+  "type" : "topic",
+  "title" : "Agenda & Handbook ",
+  "img" : "topic.png",
+  "videoid" : "",
+  "objectives" : "",
+  "folder" : "topic-00-agenda-handbook",
+  "link" : "index.html",
+  "los": [
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : "Onsite Agenda ",
+  "img" : "agenda.png",
+  "videoid" : "none",
+  "objectives" : "<p>Schedule and structure of June Onsite</p>",
+  "folder" : "talk-00-agenda",
+  "link" : "agenda.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : "Onsite Handbook ",
+  "img" : "handbook.png",
+  "videoid" : "none",
+  "objectives" : "<p>Speaker bios of our industry partner presenters</p>",
+  "folder" : "talk-00-handbook",
+  "link" : "handbook.pdf",
+  "los": [
+   ]
+
+    } 
+   ]
+
+  },
+ {
+    
+  
+    "properties" : {},
+  
+  "type" : "topic",
+  "title" : "Industry Partner Talks ",
+  "img" : "topic.png",
+  "videoid" : "",
+  "objectives" : "",
+  "folder" : "topic-01-industry-talks",
+  "link" : "index.html",
+  "los": [
+   ]
+
+  },
+ {
+    
+  
+    "properties" : {},
+  
+  "type" : "topic",
+  "title" : "Git Workshop ",
+  "img" : "topic.png",
+  "videoid" : "",
+  "objectives" : "",
+  "folder" : "topic-02-git",
+  "link" : "index.html",
+  "los": [
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : "Git Cheat Sheet ",
+  "img" : "git.png",
+  "videoid" : "none",
+  "objectives" : "<p>Quick reference of git commands</p>",
+  "folder" : "talk-2",
+  "link" : "git.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "Lab 01 Introduction",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>Introducing the fundamentals of git using the command line</p>",
+  "folder" : "book-1",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "Lab 02 Advanced",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>Expand on git branching &amp; merging features with more advanced git commands and concepts</p>",
+  "folder" : "book-2",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "web",
+  "title" : "Github Education ",
+  "img" : "web.png",
+  "videoid" : "",
+  "objectives" : "<p>GitHub Education helps students, teachers, and schools access the tools and events they need to shape the next generation of software development.</p>",
+  "folder" : "web",
+  "link" : "https://education.github.com/",
+  "los": [
+   ]
+
+    } 
+   ]
+
+  }
+ ]
+  }
+

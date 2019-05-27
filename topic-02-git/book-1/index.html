@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css"
+          type="text/css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css"
+          rel="stylesheet"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <style>
+      
+
+body {
+  font-family: "Open Sans", "Helvetica", "Helvetica Neue",  "Arial", sans-serif;
+  font-size:90%;
+  color: black;
+}
+
+p {
+  margin: 0.5em;
+}
+
+pre code {
+  font-family: "Monaco";
+  font-size: 100%;
+}
+
+img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin:10px;
+}
+
+h1, h2, h3 {
+  border-bottom:thin solid black;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+}
+
+h1 {
+  font-style:italic;
+  font-size:130%;
+}
+
+h2 {
+  font-size:110%;
+}
+
+h3 {
+  font-size:100%;
+}
+
+
+
+      
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  background: white;
+  text-align: right;
+}
+.content {
+  flex: 1;
+  overflow: auto;
+}
+
+
+
+    </style>
+  </head>
+
+  
+  
+
+  <div class="ui fixed top pointing inverted stackable menu labmenu">
+    <header class="header item">
+      <i id="toc" class="sitemap icon"></i>
+      
+        <a href="../index.html"> Git Workshop  </a>
+      
+    </header>
+    <div class="right tab-menu menu">
+      
+        <a class="item" data-tab="Lab 01 Introduction">
+          Lab 01 Introduction
+        </a>
+      
+        <a class="item" data-tab="01">
+          01
+        </a>
+      
+        <a class="item" data-tab="02">
+          02
+        </a>
+      
+        <a class="item" data-tab="03">
+          03
+        </a>
+      
+        <a class="item" data-tab="04">
+          04
+        </a>
+      
+    </div>
+  </div>
+
+
+  
+
+  <div class="ui pushable">
+    <div class="ui inverted labeled icon left inline vertical sidebar menu">
+      <br><br>
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-1/index.html">Lab 01 Introduction </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-2/index.html">Lab 02 Advanced </a>
+          
+        
+      
+    </div>
+    <div class="pusher" tabindex="-1">
+      <div class="ui basic segment">
+        <br>
+        
+          <div class="ui tab segment lab" data-tab="Lab 01 Introduction">
+            <h1>Objectives</h1>
+<p>Introducing the fundamentals of git using the command line</p>
+<h2>Why use a version control system (such as Git)?</h2>
+<ul>
+<li><p>You can keep track of the changes you make to your project as you
+work on it (like &#39;save points&#39; in a computer game, you can go back
+to previous states)</p>
+</li>
+<li><p>If you&#39;re working on the same project as other people, it helps you
+handle the synchronization (friction?) points when you make changes</p>
+</li>
+</ul>
+<h2>Why use Git specifically?</h2>
+<ul>
+<li><p>It&#39;s the most popular (the default?), and it strikes a good balance
+between being easy to use, and being powerful</p>
+</li>
+<li><p>It&#39;s decentralized, so you can do everything offline, and don&#39;t need
+to configure any server</p>
+</li>
+<li><p>It makes it easy to try new things locally without having to worry
+about breaking everything, or losing stuff</p>
+</li>
+</ul>
+<h2>What we&#39;ll cover</h2>
+<ul>
+<li>Commits - What they are and how to create them</li>
+<li>Branches - Why they are needed and how to work with them</li>
+<li>Merging - What it is and the most common types of merging</li>
+<li>Conflicts - Handling merge conflicts and minimizing the chances of hitting them</li>
+</ul>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="01">
+            <h1>Commits</h1>
+<p>A commit is a snapshot of a project at a specific point in time. Think of it as
+a &#39;save point&#39; in a video game. If you mess up your project you can go back to
+a working commit.</p>
+<h2>Practical One</h2>
+<h4>Create a new repository</h4>
+<p>Before we create our first commit, we&#39;ll need to create a repository.</p>
+<p>Create a new directory.</p>
+<pre><code class="lang-bash">mkdir git-workshop
+cd git-workshop</code></pre>
+<p>Initialize a git repository, we will see a hidden <code>.git</code> directory created in
+the current directory. Let&#39;s not focus on that too much at the moment.</p>
+<pre><code class="lang-bash">git init
+# stdout: Initialized empty Git repository in...
+
+ls -a
+# stdout: .    ..   .git</code></pre>
+<h4>Create a commit</h4>
+<p>We have our repository created. Let&#39;s create a new file with some text inside
+it.</p>
+<pre><code class="lang-bash">echo &#39;Hello, World!&#39; &gt; hello.txt</code></pre>
+<p>We can now add the <code>hello.txt</code> file to the staging area, ready to be committed.
+Any future changes to <code>hello.txt</code> will not be included in the commit we create,
+unless we add them too.</p>
+<pre><code class="lang-bash">git add hello.txt</code></pre>
+<p>Finally we can create a commit using the contents of the staging area, and
+include a descriptive message of our changes.</p>
+<pre><code class="lang-bash"># Alternatively we can just do &#39;git commit&#39;, which will open up an editor to
+# enter the commit message.
+git commit -m &quot;Add hello.txt&quot;</code></pre>
+<p>We have created a commit, now let&#39;s create another one by making some changes
+to <code>hello.txt</code>. We&#39;ll leave this one to you, but our change could look
+something like:</p>
+<pre><code class="lang-bash">echo &#39;My name is &lt;your-name&gt;!&#39; &gt;&gt; hello.txt</code></pre>
+<h4>Viewing commit history</h4>
+<p>We have two commits created, let&#39;s take a look at the commit log.</p>
+<pre><code class="lang-bash">git log</code></pre>
+<p>The commits are ordered in reverse chronological order. Each commit item
+contains the SHA-1 hash of the commit, the author, the date the commit was
+authored and the commit message. We can use the SHA-1 hash of the commit to
+reference it when using other git commands.</p>
+<p>For example, we can <em>checkout</em> a commit:</p>
+<pre><code class="lang-bash">git checkout &lt;commit-sha-1&gt;
+cat hello.txt
+# stdout: Hello, World!
+
+# Use &#39;git checkout -&#39; to checkout the previous commit.
+git checkout -
+cat hello.txt
+# stdout: Hello, World! My name is &lt;your-name&gt;</code></pre>
+<h2>Diving deeper</h2>
+<p>We covered quite a lot in the previous practical. Let&#39;s go in depth on some of
+the topics covered.</p>
+<h3>Adding (Staging) and Committing</h3>
+<p>When performing a <code>git add</code> we mentioned the &quot;staging area&quot;. This is one of the
+three sections of a git project:</p>
+<ul>
+<li><p>The working directory - This is all the files in your current directory. This
+is where files are modified before being staged.</p>
+</li>
+<li><p>The staging area - This is where changes are added during <code>git add</code>, when a
+commit is created the changes in the staging area will be the contents of the
+commit.</p>
+</li>
+<li><p>The repository - Changes that have been committed and persisted.</p>
+</li>
+</ul>
+<p><img src="./img/staging-and-comitting.png" alt="Sections of a git project"></p>
+<h3>Lifecycle of files</h3>
+<p>There are two states of a file in git:</p>
+<ul>
+<li><p>Tracked files - This is any file that is in the previous commit, or currently
+staged.</p>
+</li>
+<li><p>Untracked files - Any file that is not a tracked file.</p>
+</li>
+</ul>
+<p>A tracked file can be:</p>
+<ul>
+<li><p>Modified: Changes have been made since the previous commit, but are not
+staged.</p>
+</li>
+<li><p>Staged: Changes have been made since the previous commit, and those changes
+are staged.</p>
+</li>
+<li><p>Unmodified: No changes have been made to the file since the last commit.</p>
+</li>
+</ul>
+<p><img src="./img/file-lifecycle.png" alt="File lifecycle"></p>
+<h2>Practical Two</h2>
+<p>Now we know a bit more about staging and the lifecycle of a file, let&#39;s have a
+look at the lifecycle in action.</p>
+<p>First, let&#39;s create a new untracked file.</p>
+<pre><code class="lang-bash">echo &#39;My favourite colour is &lt;your-favourite-colour&gt;!&#39; &gt; colour.txt</code></pre>
+<p>Now we want to see the status of the current project.</p>
+<pre><code class="lang-bash">git status</code></pre>
+<p>It tells us we have an untracked file called &#39;colour.txt&#39;. As we haven&#39;t
+changed the contents of &#39;hello.txt&#39; it is unmodified and does not show by
+default.</p>
+<p>If we <code>add</code> &#39;colour.txt&#39; to the staging area and check the status again we will
+see git is now telling us the file is staged or ready to be committed, the file
+is now also tracked.</p>
+<pre><code class="lang-bash">git add colour.txt
+
+git status
+# Note that the output also tells us how to unstage the file, using git reset.</code></pre>
+<p>Now let&#39;s change the contents of &#39;hello.txt&#39;, the file will then become
+modified and this will be shown when running <code>git status</code>.</p>
+<pre><code class="lang-bash">echo &#39;I am doing a Git workshop!&#39; &gt;&gt; hello.txt
+
+git status</code></pre>
+<p>Finally <code>add</code> and <code>commit</code> all of the changes.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="02">
+            <h1>Branches</h1>
+<p>A branch is just a reference to a commit, it has a human-readable name
+and identifier. Instead of using the SHA-1 hash to reference a commit we can
+now use the name of a branch.</p>
+<p>When creating a repository using <code>git init</code> a branch named &#39;master&#39; is created
+for us, it is currently pointed at our latest commit.</p>
+<p><img src="./img/basic-branch.png" alt="The current state of our repository"></p>
+<p>Let&#39;s designate &#39;master&#39; as the branch for our main line of development,
+anything on that branch should be stable. If we want to test out new features
+without breaking the main line then we can create new branches.</p>
+<h2>Practical One</h2>
+<p>We want to add a new file to our current project, but we don&#39;t want to mess up
+&#39;master&#39;.</p>
+<h4>View the current branches</h4>
+<p>We can see all of the branches in our repository.</p>
+<pre><code class="lang-bash">git branch
+# stdout: master</code></pre>
+<h4>Create a new branch from master</h4>
+<p>To add our new feature we want to add a new branch. Our new feature is adding
+information about our favourite animal so let&#39;s call the branch something
+descriptive like &#39;favourite-animal&#39;.</p>
+<pre><code class="lang-bash">git branch favourite-animal
+# If we do a &#39;git branch&#39; now we&#39;ll see our new branch is created, but we&#39;re
+# still on master. Let&#39;s &#39;checkout&#39; our new branch.
+
+git checkout favourite-animal</code></pre>
+<p>Now that we have our branch created let&#39;s take a look at our commit history
+using <code>git log</code>, this will give us information about what commit each branch is
+currently pointing to.</p>
+<h4>Make some changes</h4>
+<p>Let&#39;s make some changes to our new branch and commit them.</p>
+<pre><code class="lang-bash">echo &#39;My favourite animal is a &lt;your-favourite-animal&gt;!&#39; &gt; animal.txt
+
+git add animal.txt
+git commit -m &quot;Add favourite animal&quot;</code></pre>
+<p>We now have a repository that looks like this.</p>
+<p><img src="./img/two-branches.png" alt="The new state of our repository"></p>
+<h2>Diving deeper</h2>
+<h3>Branches under the hood</h3>
+<p>Branches are stored in the <code>.git/refs/heads</code> directory as files. If we view the
+contents of any of these files they just contain the SHA-1 hash of the commit
+the branch is currently pointing to.</p>
+<pre><code class="lang-bash">cat .git/refs/heads/favourite-animal</code></pre>
+<h3>HEAD</h3>
+<p>When we were doing <code>git log</code> you may have seen &#39;HEAD&#39; mentioned in the log.
+HEAD points to whatever is currently checked out. At the moment we have the
+&#39;favourite-animal&#39; branch checked out so it will point to that. HEAD is a file
+in the <code>.git</code> directory.</p>
+<pre><code class="lang-bash">cat .git/HEAD
+# stdout: ref: refs/heads/favourite-animal</code></pre>
+<h2>Practical Two</h2>
+<p>We have created a branch that has information about our favourite animal. Now
+let&#39;s create another branch from master and add information about our favourite
+TV show. We are currently on the branch &#39;favourite-animal&#39;. We need to create
+our new branch from master.</p>
+<pre><code class="lang-bash"># Create a new branch named favourite-show from the branch master
+git branch favourite-show master
+git checkout favourite-show</code></pre>
+<p>We&#39;ll leave the rest to you.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="03">
+            <h1>Merging</h1>
+<p>In the last section, we learned about creating new branches. Often branches are
+created temporarily to work on a specific piece of work. When that work is
+ready, then those changes are brought back into the main line again.</p>
+<p>Remember the branches from the last section? Originally there was the master
+branch, and then we created a branch called &#39;favourite-animal&#39;, where we made
+changes. We can now merge those changes back into master branch, and delete the
+&#39;my-new-branch&#39; since we won&#39;t need it anymore.</p>
+<h2>Practical One - Fast-forward merging</h2>
+<p>The simplest form of merging is <em>fast-forward</em> merging. Since branches are just
+references to commits, and &#39;favourite-animal&#39; is a direct descendant of master;
+we can just update master to point to the same commit as &#39;favourite-animal&#39;.</p>
+<p>This is the default way that git will merge when the target branch is an
+ancestor of the source branch. First, <code>checkout</code> the target branch (master in
+this case), and then use the <code>merge</code> subcommand to bring the changes from the
+source branch (favourite-animal) into this branch:</p>
+<pre><code class="lang-bash">git checkout master
+
+git merge favourite-animal</code></pre>
+<p>Master and the &#39;favourite-animal&#39; branch are now pointing at the same commit.
+We can delete the &#39;favourite-animal&#39; branch.</p>
+<pre><code class="lang-bash">git branch -d favourite-animal</code></pre>
+<h2>Practial Two - Merge commits</h2>
+<p>In some cases, the target branch will not be a direct ancestor of the source
+branch. This is the case for our &#39;favourite-show&#39; branch. Here, the default
+action is to create a new commit which has two (or more) <em>parent</em> commits and a
+message.</p>
+<p><img src="./img/basic-merging-before.png" alt="Before creating a merge commit"></p>
+<p>While on the master branch, we can now merge the changes from the
+&#39;favourite-show&#39; branch as follows:</p>
+<pre><code class="lang-bash">git merge favourite-show</code></pre>
+<p>The default commit message editor will have appeared here, to give you the
+opportunity to modify the commit message for the new commit. The default is
+usually fine.</p>
+<p><img src="./img/basic-merging-after.png" alt="After creating a merge commit"></p>
+<p>Usually a <em>merge commit</em> will not contain any changes to files itself. The
+changes will be in its ancestors. Sometimes when merging two divergent branches
+though, there will be conflicting changes on either side of the merge. In this
+case, there may be changes needed in the merge commit to resolve the conflicts.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="04">
+            <h1>Conflicts</h1>
+<h2>What are conflicts, and how do they happen?</h2>
+<p>Conflicts in git occur when trying to integrate changes from two different
+states, where different changes are made in one place. The most common case is
+when performing a <em>merge</em> of one branch into another, where there&#39;s a change to
+a particular line in a particular file on both sides of the merge.</p>
+<p>Git doesn&#39;t know what to do automatically, so it just stops in the middle of
+the action, and asks you to intervene.</p>
+<h2>Practical One</h2>
+<p>First, let&#39;s make a new branch and add a file:</p>
+<pre><code class="lang-bash">git checkout -b left master
+
+echo &quot;Left is the best&quot; &gt; conflict.txt
+
+git add conflict.txt
+git commit -m &quot;Left is the best&quot;</code></pre>
+<p>Next, for the purposes of demonstration, let&#39;s create another branch, 
+called <code>right</code>:</p>
+<pre><code class="lang-bash">git checkout -b right master
+
+echo &quot;Right is the best&quot; &gt; conflict.txt
+git add conflict.txt
+git commit -m &quot;Right is the best&quot;</code></pre>
+<p>We&#39;ve made changes here in the same file, in two separate 
+branches. If we try to integrate these branches with a merge, 
+we&#39;re going to see a conflict. Let&#39;s merge <code>the-left</code> into 
+<code>the-right</code> to see a conflict:</p>
+<pre><code class="lang-bash">git merge left</code></pre>
+<p>We now are told that there has been a conflict while perfoming the merge. Git
+has stopped the merge process and asked us to resolve the conflict before
+continuing. We can check the status of our repo to see the unmerged paths and
+instructions on how to resolve the conflict.</p>
+<pre><code class="lang-bash">git status</code></pre>
+<p>Let&#39;s open &#39;conflict.txt&#39; in an editor and go through how to resolve a
+conflict. This is the content of our file:</p>
+<pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Right is the best
+=======
+Left is the best
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; left</code></pre>
+<p>What are the components of this block? This block is saying that the version of
+the change in HEAD (right branch) is above the &#39;=======&#39; and everything below
+it is the change in the branch named &#39;left&#39;. We can choose to keep one of these
+changes, keep both, or change the content to something different.</p>
+<p>Let&#39;s update the contents of the file to:</p>
+<pre><code>Right and Left are both equally good</code></pre>
+<p>With our conflict manually resolved, we need to <code>git add</code>:</p>
+<pre><code># Stage our change and mark conflict as resolved
+git add conflict.txt</code></pre>
+<p>Lets check our <code>git status</code> once more.</p>
+<pre><code class="lang-bash">git status</code></pre>
+<p>It tells us that all the conflicts have been resolved, but we are still in the
+merging process. Finally, commit the integrated change. This will prompt for a
+commit message. Leaving the default message is fine.</p>
+<pre><code class="lang-bash">git commit</code></pre>
+<h2>Diving deeper</h2>
+<h4>Aborting a merge</h4>
+<p>We can abort a merge that&#39;s in progress by using the <code>git merge --abort</code>
+command.</p>
+<h5>Minimising merge conflicts</h5>
+<p>To minimise merge conflicts keep commits small and integrate changes often.</p>
+
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <br>
+  <script>
+    $(document).on('keydown', function(e) {
+  e = e || window.event;
+  var nextTab;
+  switch (e.which || e.keyCode) {
+    case 37: // left
+      nextTab = $('.tab-menu a[data-tab].active').prev('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').last();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+
+    case 39: // right
+      nextTab = $('.tab-menu a[data-tab].active').next('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').first();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+  }
+});
+
+    $(document).ready(function() {
+  $('img').addClass('ui image');
+
+  $('.ui.embed').embed();
+
+  const $images = $('.lab img');
+  jQuery.each($images, function(i) {
+    if ($images[i].alt.length > 0) {
+      const divImg = $(document.createElement('div')).addClass(
+        'ui basic segment',
+      );
+      $($images[i]).wrap(divImg);
+      const divLabel = $(document.createElement('div')).addClass(
+        'ui blue ribbon label',
+      );
+      divLabel.append($images[i].alt);
+      $(divLabel).insertBefore($images[i]);
+    }
+  });
+
+  $('.ui.menu .item').tab({
+    history: true,
+    historyType: 'hash',
+  });
+
+  $('.popup').popup();
+
+  $('.ui.sidebar')
+    .sidebar({ context: $('.pushable') })
+    .sidebar('setting', 'transition', 'slide out')
+    .sidebar('attach events', '#toc');
+});
+
+  </script>
+
+
+
+  <div class="ui bottom fixed borderless right menu">
+    <div class="ui right small menu">
+      <div class="ui tiny basic message segment">
+         Powered by <a href="https://github.com/edeleastar/tutors-ts">tutors-ts.</a> 
+      </div>
+    </div>
+  </div>
+
+  </body>
+
+</html>
