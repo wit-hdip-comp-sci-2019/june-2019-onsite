@@ -1,0 +1,35 @@
+
+
+
+  {
+  
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "11: Hooks",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>Do something before or after a particular action</p>",
+  "folder" : "book-11",
+  "link" : "index.html",
+  "los": [
+   ]
+,
+  "chapters" : [
+  
+    {
+    "title": "# Hooks",
+    "shortTitle": "11: Hooks",
+    "contentMd" : "# Hooks\n\nDo something before or after a particular action\n\nGit hooks are scripts that Git executes before or after events such as: commit, push, and receive. Git hooks are a built-in feature - no need to download anything. Git hooks are run locally.\n\n* Server-side hooks: we can't use them because of Github. Use webhooks instead\n* Client-side hooks:\n  * 'git am' hooks: we don't use 'am', so we don't care\n  * Commit:\n    * post-commit\n    * commit-msg\n    * prepare-commit-msg\n    * pre-commit\n  * Others\n    * pre-rebase\n    * post-checkout\n    * post-merge\n    * pre-push\n    * pre-auto-gc\n    * post-rewrite\n\n```bash\n# everything you need to know about each hook\nman githooks\n```"
+    },
+  
+    {
+    "title": "# Practical",
+    "shortTitle": "Practical",
+    "contentMd" : "# Practical\n\n* Hooks are stored in `.git/hooks/` in your repo\n* Hooks can be scripts in any language, and can run any programs available on the system\n\n## View samples\n```bash\n$ cd .git/hooks/\n# To view a list of sample hooks\n$ ls\n# To view the pre-commit example hook\n$ less pre-commit.sample\n```\n## Build our own hook\n```bash\n# Create a pre-commit file\n$ touch pre-commit\n# Open file in vi or editor of choice \n$ vi pre-commit\n```\nNow we will add a simple bash script to our pre-commit hook, which will return to us the current weather in Waterford. \nCopy the following script into the pre-commit hook\n```bash\n#!/usr/bin/sh\ncurl wttr.in/~Waterford\n```\nNow this hook will be triggered before we make a commit. Return to the _git-workshop_ directory where we will make a change to our _hello.txt_ file\n```bash\n# Make a change to hello.txt\n$ echo 'I am going to trigger a hook' >> hello.txt\n# Add hello.txt\n$ git add hello.txt\n# Commit hello.txt\n$ git commit -m 'this should trigger a hook'\n```\n## More on Hooks\nHooks can be an extremely powerful tool for a developer. For more information refer to https://githooks.com/ "
+    }
+  
+  ]
+  }
+

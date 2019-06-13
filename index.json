@@ -103,7 +103,7 @@
   "img" : "git.png",
   "videoid" : "none",
   "objectives" : "<p>Quick reference of git commands</p>",
-  "folder" : "talk-2",
+  "folder" : "talk-1",
   "link" : "git.pdf",
   "los": [
    ]
@@ -114,12 +114,28 @@
   
     "properties" : {},
   
+  "type" : "talk",
+  "title" : "Git Workshop Introduction ",
+  "img" : "introd.png",
+  "videoid" : "none",
+  "objectives" : "<p>Who we are and what we will cover.</p>",
+  "folder" : "talk-2",
+  "link" : "introd.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
   "type" : "lab",
-  "title" : "Lab 01 Introduction",
+  "title" : "01: Commits",
   "img" : "img/main.png",
   "videoid" : "none",
-  "objectives" : "<p>Introducing the fundamentals of git using the command line</p>",
-  "folder" : "book-1",
+  "objectives" : "<p>The fundamental building blocks of Git</p>",
+  "folder" : "book-01",
   "link" : "index.html",
   "los": [
    ]
@@ -131,11 +147,203 @@
     "properties" : {},
   
   "type" : "lab",
-  "title" : "Lab 02 Advanced",
+  "title" : "02: Branches",
   "img" : "img/main.png",
   "videoid" : "none",
-  "objectives" : "<p>Expand on git branching &amp; merging features with more advanced git commands and concepts</p>",
-  "folder" : "book-2",
+  "objectives" : "<p>Branches make working with commits easier</p>",
+  "folder" : "book-02",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "03: Merging",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>Like road merging but for branches</p>",
+  "folder" : "book-03",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "04: Conflicts",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>What are conflicts, and how do they happen?</p>",
+  "folder" : "book-04",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "05: Rundown",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>A recap of some core concepts we have already covered</p>",
+  "folder" : "book-05",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "06: GitHub",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>GitHub is an online service to help people work together on projects</p>",
+  "folder" : "book-06",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "07: Rebasing",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>Time to rewrite history</p>",
+  "folder" : "book-07",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "08: Tagging",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>Tags are like branches, except they don&#39;t usually change</p>",
+  "folder" : "book-08",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "09: Cherry Picking",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>Selectively take the changes from a particular commit on a different branch</p>",
+  "folder" : "book-09",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "10: Stashing",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>Move changes in a dirty workspace away to the side</p>",
+  "folder" : "book-10",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "11: Hooks",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>Do something before or after a particular action</p>",
+  "folder" : "book-11",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "12: Config",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>Configuring your Git</p>",
+  "folder" : "book-12",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "13: Bisecting",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>Finding commits within your project.</p>",
+  "folder" : "book-13",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "14: Under the Covers",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>Gaining a deeper understanding of Git and its components</p>",
+  "folder" : "book-14",
   "link" : "index.html",
   "los": [
    ]

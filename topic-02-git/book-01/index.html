@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css"
+          type="text/css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css"
+          rel="stylesheet"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <style>
+      
+
+body {
+  font-family: "Open Sans", "Helvetica", "Helvetica Neue",  "Arial", sans-serif;
+  font-size:90%;
+  color: black;
+}
+
+p {
+  margin: 0.5em;
+}
+
+pre code {
+  font-family: "Monaco";
+  font-size: 100%;
+}
+
+img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin:10px;
+}
+
+h1, h2, h3 {
+  border-bottom:thin solid black;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+}
+
+h1 {
+  font-style:italic;
+  font-size:130%;
+}
+
+h2 {
+  font-size:110%;
+}
+
+h3 {
+  font-size:100%;
+}
+
+
+
+      
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  background: white;
+  text-align: right;
+}
+.content {
+  flex: 1;
+  overflow: auto;
+}
+
+
+
+    </style>
+  </head>
+
+  
+  
+
+  <div class="ui fixed top pointing inverted stackable menu labmenu">
+    <header class="header item">
+      <i id="toc" class="sitemap icon"></i>
+      
+        <a href="../index.html"> Git Workshop  </a>
+      
+    </header>
+    <div class="right tab-menu menu">
+      
+        <a class="item" data-tab="01: Commits">
+          01: Commits
+        </a>
+      
+        <a class="item" data-tab="Practical 1">
+          Practical 1
+        </a>
+      
+        <a class="item" data-tab="Diving Deeper">
+          Diving Deeper
+        </a>
+      
+        <a class="item" data-tab="Practical 2">
+          Practical 2
+        </a>
+      
+    </div>
+  </div>
+
+
+  
+
+  <div class="ui pushable">
+    <div class="ui inverted labeled icon left inline vertical sidebar menu">
+      <br><br>
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-01/index.html">01: Commits </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-02/index.html">02: Branches </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-03/index.html">03: Merging </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-04/index.html">04: Conflicts </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-05/index.html">05: Rundown </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-06/index.html">06: GitHub </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-07/index.html">07: Rebasing </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-08/index.html">08: Tagging </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-09/index.html">09: Cherry Picking </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-10/index.html">10: Stashing </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-11/index.html">11: Hooks </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-12/index.html">12: Config </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-13/index.html">13: Bisecting </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-14/index.html">14: Under the Covers </a>
+          
+        
+      
+    </div>
+    <div class="pusher" tabindex="-1">
+      <div class="ui basic segment">
+        <br>
+        
+          <div class="ui tab segment lab" data-tab="01: Commits">
+            <h1>Commits</h1>
+<p>The fundamental building blocks of Git</p>
+<p>A commit is a snapshot of a project at a specific point in time. Think of it as
+a &#39;save point&#39; in a video game. If you mess up your project you can go back to
+a working commit.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Practical 1">
+            <h1>Practical One</h1>
+<h2>Create a new repository</h2>
+<p>Before we create our first commit, we&#39;ll need to create a repository.</p>
+<p>Create a new directory.</p>
+<pre><code class="lang-bash">mkdir git-workshop
+cd git-workshop</code></pre>
+<p>Initialize a git repository, we will see a hidden <code>.git</code> directory created in
+the current directory. Let&#39;s not focus on that too much at the moment.</p>
+<pre><code class="lang-bash">git init
+# stdout: Initialized empty Git repository in...
+
+ls -a
+# stdout: .    ..   .git</code></pre>
+<h2>Create a commit</h2>
+<p>We have our repository created. Let&#39;s create a new file with some text inside
+it.</p>
+<pre><code class="lang-bash">echo &#39;Hello, World!&#39; &gt; hello.txt</code></pre>
+<p>We can now add the <code>hello.txt</code> file to the staging area, ready to be committed.
+Any future changes to <code>hello.txt</code> will not be included in the commit we create,
+unless we add them too.</p>
+<pre><code class="lang-bash">git add hello.txt</code></pre>
+<p>Finally we can create a commit using the contents of the staging area, and
+include a descriptive message of our changes.</p>
+<pre><code class="lang-bash"># Alternatively we can just do &#39;git commit&#39;, which will open up an editor to
+# enter the commit message.
+git commit -m &quot;Add hello.txt&quot;</code></pre>
+<p>We have created a commit, now let&#39;s create another one by making some changes
+to <code>hello.txt</code>. We&#39;ll leave this one to you, but our change could look
+something like:</p>
+<pre><code class="lang-bash">echo &#39;My name is &lt;your-name&gt;!&#39; &gt;&gt; hello.txt</code></pre>
+<h2>Viewing commit history</h2>
+<p>We have two commits created, let&#39;s take a look at the commit log.</p>
+<pre><code class="lang-bash"># To exit the log simply press &#39;q&#39;
+git log</code></pre>
+<p>The commits are ordered in reverse chronological order. Each commit item
+contains the SHA-1 hash of the commit, the author, the date the commit was
+authored and the commit message. We can use the SHA-1 hash of the commit to
+reference it when using other git commands.</p>
+<p>For example, we can <em>checkout</em> a commit:</p>
+<pre><code class="lang-bash">git checkout &lt;commit-sha-1&gt;
+cat hello.txt
+# stdout: Hello, World!
+
+# Use &#39;git checkout -&#39; to checkout the previous commit.
+git checkout -
+cat hello.txt
+# stdout: Hello, World! My name is &lt;your-name&gt;</code></pre>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Diving Deeper">
+            <h1>Diving deeper</h1>
+<p>We covered quite a lot in the previous practical. Let&#39;s go in depth on some of
+the topics covered.</p>
+<h2>Adding (Staging) and Committing</h2>
+<p>When performing a <em>git add</em> we mentioned the &quot;staging area&quot;. This is one of the
+three sections of a git project:</p>
+<ul>
+<li><p>The working directory - This is all the files in your current directory. This
+is where files are modified before being staged.</p>
+</li>
+<li><p>The staging area - This is where changes are added during <em>git add</em>, when a
+commit is created the changes in the staging area will be the contents of the
+commit.</p>
+</li>
+<li><p>The repository - Changes that have been committed and persisted.</p>
+</li>
+</ul>
+<p><img src="./img/staging-and-comitting.png" alt="Sections of a git project"></p>
+<h2>Lifecycle of files</h2>
+<p>There are two states of a file in git:</p>
+<ul>
+<li><p>Tracked files - This is any file that is in the previous commit, or currently
+staged.</p>
+</li>
+<li><p>Untracked files - Any file that is not a tracked file.</p>
+</li>
+</ul>
+<p>A tracked file can be:</p>
+<ul>
+<li><p>Modified: Changes have been made since the previous commit, but are not
+staged.</p>
+</li>
+<li><p>Staged: Changes have been made since the previous commit, and those changes
+are staged.</p>
+</li>
+<li><p>Unmodified: No changes have been made to the file since the last commit.</p>
+</li>
+</ul>
+<p><img src="./img/file-lifecycle.png" alt="File lifecycle"></p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Practical 2">
+            <h1>Practical Two</h1>
+<p>Now we know a bit more about staging and the lifecycle of a file, let&#39;s have a
+look at the lifecycle in action.</p>
+<p>First, let&#39;s create a new untracked file.</p>
+<pre><code class="lang-bash">echo &#39;My favourite colour is &lt;your-favourite-colour&gt;!&#39; &gt; colour.txt</code></pre>
+<p>Now we want to see the status of the current project.</p>
+<pre><code class="lang-bash">git status</code></pre>
+<p>It tells us we have an untracked file called &#39;colour.txt&#39;. As we haven&#39;t
+changed the contents of &#39;hello.txt&#39; it is unmodified and does not show by
+default.</p>
+<p>If we <code>add</code> &#39;colour.txt&#39; to the staging area and check the status again we will
+see git is now telling us the file is staged or ready to be committed, the file
+is now also tracked.</p>
+<pre><code class="lang-bash">git add colour.txt
+
+git status
+# Note that the output also tells us how to unstage the file, using git reset.</code></pre>
+<p>Now let&#39;s change the contents of &#39;hello.txt&#39;, the file will then become
+modified and this will be shown when running <code>git status</code>.</p>
+<pre><code class="lang-bash">echo &#39;I am doing a Git workshop!&#39; &gt;&gt; hello.txt
+
+git status</code></pre>
+<p>Finally <code>add</code> and <code>commit</code> all of the changes.</p>
+
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <br>
+  <script>
+    $(document).on('keydown', function(e) {
+  e = e || window.event;
+  var nextTab;
+  switch (e.which || e.keyCode) {
+    case 37: // left
+      nextTab = $('.tab-menu a[data-tab].active').prev('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').last();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+
+    case 39: // right
+      nextTab = $('.tab-menu a[data-tab].active').next('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').first();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+  }
+});
+
+    $(document).ready(function() {
+  $('img').addClass('ui image');
+
+  $('.ui.embed').embed();
+
+  const $images = $('.lab img');
+  jQuery.each($images, function(i) {
+    if ($images[i].alt.length > 0) {
+      const divImg = $(document.createElement('div')).addClass(
+        'ui basic segment',
+      );
+      $($images[i]).wrap(divImg);
+      const divLabel = $(document.createElement('div')).addClass(
+        'ui blue ribbon label',
+      );
+      divLabel.append($images[i].alt);
+      $(divLabel).insertBefore($images[i]);
+    }
+  });
+
+  $('.ui.menu .item').tab({
+    history: true,
+    historyType: 'hash',
+  });
+
+  $('.popup').popup();
+
+  $('.ui.sidebar')
+    .sidebar({ context: $('.pushable') })
+    .sidebar('setting', 'transition', 'slide out')
+    .sidebar('attach events', '#toc');
+});
+
+  </script>
+
+
+
+  <div class="ui bottom fixed borderless right menu">
+    <div class="ui right small menu">
+      <div class="ui tiny basic message segment">
+         Powered by <a href="https://github.com/edeleastar/tutors-ts">tutors-ts.</a> 
+      </div>
+    </div>
+  </div>
+
+  </body>
+
+</html>

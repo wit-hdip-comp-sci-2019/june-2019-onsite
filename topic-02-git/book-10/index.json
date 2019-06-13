@@ -1,0 +1,35 @@
+
+
+
+  {
+  
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "10: Stashing",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>Move changes in a dirty workspace away to the side</p>",
+  "folder" : "book-10",
+  "link" : "index.html",
+  "los": [
+   ]
+,
+  "chapters" : [
+  
+    {
+    "title": "# Stashing",
+    "shortTitle": "10: Stashing",
+    "contentMd" : "# Stashing\n\nMove changes in a dirty workspace away to the side\n"
+    },
+  
+    {
+    "title": "# Practical",
+    "shortTitle": "Practical",
+    "contentMd" : "# Practical\n\n## Prerequisite\nEnsure your current directory is the one which we created in practical one -- _git-workshop_\n```bash\n# you should have the following or similar after you 'ls'\n$ ls\nanimal.txt  colour.txt  hello.txt  show.txt\n```\n\n## Stash work\n\n```bash\n# Lets create a dirty workspace\n$ echo 'I am an unwanted change' >> hello.txt\n\n# Git status should show our hello.txt file not staged for commit.\n$ git status \n\n# \"stash\" those changes\n$ git stash save \"Experimental work with hello.txt\"\n\n# Git status will show we are working tree clean with nothing to commit\ngit status \n\n# See what is stashed in this repository\n$ git stash list\nstash@{0}: On master: experimental work with hello.txt\n```\nNow make another change to _hello.txt_ before moving on to the next section\n```bash\n# We want to stash your last change, check the status and our stash list\n$ git stash\n$ git status\nOn branch master\nnothing to commit, working tree clean\n$ git stash list\nstash@{0}: WIP on master: 21954be rerge branch 'favourite-show'\nstash@{1}: On master: experimental work with hello.txt\n\n# Restore top/first stash (stash@{0}) & remove it from the list\n$ git stash pop # == apply && drop\n\n# Back to hello.txt ready to be staged\n$ git status -s\n M hello.txt\n```\n\n## Reference commands\n```bash\n# 'save' is the default stash action -- needed if you want to include a message\n$ git stash save -u \"Stash all including untracked\"\n\n# Bring it (or another stash) back\n$ git stash apply stash@{0}\n\n# Remove the stash if it's no longer needed\ngit stash drop stash@{0}\n\n# Or make a new branch & restore your changes there\ngit stash branch <branchname> [stash@<revision>]\n```"
+    }
+  
+  ]
+  }
+

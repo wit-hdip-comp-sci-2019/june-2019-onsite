@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css"
+          type="text/css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css"
+          rel="stylesheet"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <style>
+      
+
+body {
+  font-family: "Open Sans", "Helvetica", "Helvetica Neue",  "Arial", sans-serif;
+  font-size:90%;
+  color: black;
+}
+
+p {
+  margin: 0.5em;
+}
+
+pre code {
+  font-family: "Monaco";
+  font-size: 100%;
+}
+
+img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin:10px;
+}
+
+h1, h2, h3 {
+  border-bottom:thin solid black;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+}
+
+h1 {
+  font-style:italic;
+  font-size:130%;
+}
+
+h2 {
+  font-size:110%;
+}
+
+h3 {
+  font-size:100%;
+}
+
+
+
+      
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  background: white;
+  text-align: right;
+}
+.content {
+  flex: 1;
+  overflow: auto;
+}
+
+
+
+    </style>
+  </head>
+
+  
+  
+
+  <div class="ui fixed top pointing inverted stackable menu labmenu">
+    <header class="header item">
+      <i id="toc" class="sitemap icon"></i>
+      
+        <a href="../index.html"> Git Workshop  </a>
+      
+    </header>
+    <div class="right tab-menu menu">
+      
+        <a class="item" data-tab="14: Under the Covers">
+          14: Under the Covers
+        </a>
+      
+        <a class="item" data-tab="COMMIT_EDITMSG">
+          COMMIT_EDITMSG
+        </a>
+      
+        <a class="item" data-tab="Objects">
+          Objects
+        </a>
+      
+        <a class="item" data-tab="Porcelain">
+          Porcelain
+        </a>
+      
+        <a class="item" data-tab="Reflog">
+          Reflog
+        </a>
+      
+    </div>
+  </div>
+
+
+  
+
+  <div class="ui pushable">
+    <div class="ui inverted labeled icon left inline vertical sidebar menu">
+      <br><br>
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-01/index.html">01: Commits </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-02/index.html">02: Branches </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-03/index.html">03: Merging </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-04/index.html">04: Conflicts </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-05/index.html">05: Rundown </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-06/index.html">06: GitHub </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-07/index.html">07: Rebasing </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-08/index.html">08: Tagging </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-09/index.html">09: Cherry Picking </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-10/index.html">10: Stashing </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-11/index.html">11: Hooks </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-12/index.html">12: Config </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-13/index.html">13: Bisecting </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-14/index.html">14: Under the Covers </a>
+          
+        
+      
+    </div>
+    <div class="pusher" tabindex="-1">
+      <div class="ui basic segment">
+        <br>
+        
+          <div class="ui tab segment lab" data-tab="14: Under the Covers">
+            <h1>Under the Covers</h1>
+<p>Gaining a deeper understanding of Git and its components</p>
+<pre><code class="lang-bash">$ tree -L 1 ./.git
+./.git
+├── branches
+├── COMMIT_EDITMSG # Text of most recent commit message
+├── config         # Local configuration specific to this repo
+├── description
+├── FETCH_HEAD     # Info about what was fetched from remotes
+├── HEAD           # Special ref that points to current ref in ./git/refs
+├── hooks          # Dir containing scripts that run at specific events
+├── index          # Binary representation of the index/cache/staging area
+├── info           
+├── logs           # Dir containing info used by reflog
+├── objects        # Dir containing all &quot;objects&quot; (loose or packed)
+├── ORIG_HEAD
+├── packed-refs    # (compressed)
+├── refs           # Branch, tag, remote, stash info
+└── rr-cache</code></pre>
+<ul>
+<li>The stuff outside the .git directory is the checked-out working directory.</li>
+<li>Only .git contents (expanded) exist on server: bare repo.</li>
+</ul>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="COMMIT_EDITMSG">
+            <h1>COMMIT_EDITMSG</h1>
+<p><code>COMMIT_EDITMSG</code> can be useful with the hub command to create a pull-request on github with a single command</p>
+<pre><code class="lang-bash"># Create a PR against master branch of the repo in the feedhenry org
+# with the contents of the most recent commit message as the description
+git pull-request -b feedhenry:master -F ./.git/COMMIT_EDITMSG</code></pre>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Objects">
+            <h1>Git objects - what are they?</h1>
+<ul>
+<li>Blob - Think of blobs as file contents (deflated) with a size &amp; type header.</li>
+<li>Tree - Trees refer to blobs (and other trees), similar to how a directory points to files (and child directories).</li>
+<li>Commit - Commits consist of a tree, parent commits, metadata (message, author details, time, etc).</li>
+<li>Tag - An annotated tag is an object type that points to another object, and contains metadata such as timestamp, tag name, description, tagger and gpgsig. Most commonly refers to a commit.</li>
+</ul>
+<h2>Inspecting Objects with git cat-file</h2>
+<pre><code class="lang-bash"># What type of object is it?
+$ git cat-file -t $(git rev-parse HEAD)
+commit
+
+# What size is it (in bytes)?
+$ git cat-file -s e29b7eef219e38d005b1360214322a336a56729e
+1079
+
+# Pretty-print it
+$ git cat-file -p $(git rev-parse HEAD)^
+tree 2320f5bb8cf059571ed69d705ba792c7939296f5
+parent e67aeb6f2a1c521f62106ede0b53f3a30ce57a36
+parent d4c13babe4fb19550455d96cd067a19f745d999e
+author Jason Madigan &lt;jmadigan@redhat.com&gt; 1480413570 +0000
+committer GitHub &lt;noreply@github.com&gt; 1480413570 +0000
+
+Merge pull request #2 from fheng/readme-updates
+
+README updates</code></pre>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Porcelain">
+            <h1>Crazy example with no files or porcelain commands</h1>
+<p>Porcelain provides a more user-friendly interface to the plumbing
+<a href="https://git.io/v1Bt5">https://git.io/v1Bt5</a></p>
+<pre><code class="lang-bash"># Create a new branch from master &amp; checkout
+git co -b ungit master
+
+# Make a new blob object
+blob_sha1=$(echo &quot;Let&#39;s ungit&quot; | git hash-object -w --stdin)
+
+# Add the blob as a file in the index
+git update-index --add --cacheinfo 100644 ${blob_sha1} ungit.txt
+
+# Make a tree object from the current index
+tree_sha1=$(git write-tree)
+
+# Make a commit object with the newly-created tree
+commit_sha1=$(echo &quot;Ungit all the things&quot; | git commit-tree -p HEAD ${tree_sha1})
+
+# Update the current branch with that new commit
+git merge ${commit_sha1}
+
+# WTF, where&#39;s my ungit.txt?!
+ls &amp;&amp; git status</code></pre>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Reflog">
+            <h1>Reflog - git&#39;s safety net</h1>
+<p>Git commands that change the state of the local repo will write an entry to the reflog</p>
+<pre><code class="lang-bash">git reflog # git log -g --abbrev-commit --pretty=oneline
+a21f4c4 HEAD@{0}: merge a21f4c412fa194021faa859193380a26b54a024d: Fast-forward
+c838b24 HEAD@{1}: merge c838b2447de706f53eaabed16c371abbb6d82b03: Fast-forward
+e29b7ee HEAD@{2}: checkout: moving from cp-conflict-example to ungit
+bf196ea HEAD@{3}: commit (cherry-pick): Bumping version to 2.0.8
+e29b7ee HEAD@{4}: checkout: moving from cp-example to cp-conflict-example
+b2d9004 HEAD@{5}: checkout: moving from master to cp-example
+e29b7ee HEAD@{6}: checkout: moving from cp-example to master
+b2d9004 HEAD@{7}: cherry-pick: name change
+e29b7ee HEAD@{8}: checkout: moving from master to cp-example
+e29b7ee HEAD@{9}: clone: from git@github.com:fheng/git-tutorial.git
+
+# Checkout a previous state
+git checkout HEAD@{2} # detached head, consider creating a branch here if important
+
+# Reset current branch to an earlier state
+git reset [--hard] HEAD@{4}</code></pre>
+
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <br>
+  <script>
+    $(document).on('keydown', function(e) {
+  e = e || window.event;
+  var nextTab;
+  switch (e.which || e.keyCode) {
+    case 37: // left
+      nextTab = $('.tab-menu a[data-tab].active').prev('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').last();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+
+    case 39: // right
+      nextTab = $('.tab-menu a[data-tab].active').next('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').first();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+  }
+});
+
+    $(document).ready(function() {
+  $('img').addClass('ui image');
+
+  $('.ui.embed').embed();
+
+  const $images = $('.lab img');
+  jQuery.each($images, function(i) {
+    if ($images[i].alt.length > 0) {
+      const divImg = $(document.createElement('div')).addClass(
+        'ui basic segment',
+      );
+      $($images[i]).wrap(divImg);
+      const divLabel = $(document.createElement('div')).addClass(
+        'ui blue ribbon label',
+      );
+      divLabel.append($images[i].alt);
+      $(divLabel).insertBefore($images[i]);
+    }
+  });
+
+  $('.ui.menu .item').tab({
+    history: true,
+    historyType: 'hash',
+  });
+
+  $('.popup').popup();
+
+  $('.ui.sidebar')
+    .sidebar({ context: $('.pushable') })
+    .sidebar('setting', 'transition', 'slide out')
+    .sidebar('attach events', '#toc');
+});
+
+  </script>
+
+
+
+  <div class="ui bottom fixed borderless right menu">
+    <div class="ui right small menu">
+      <div class="ui tiny basic message segment">
+         Powered by <a href="https://github.com/edeleastar/tutors-ts">tutors-ts.</a> 
+      </div>
+    </div>
+  </div>
+
+  </body>
+
+</html>

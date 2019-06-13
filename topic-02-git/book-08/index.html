@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css"
+          type="text/css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css"
+          rel="stylesheet"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <style>
+      
+
+body {
+  font-family: "Open Sans", "Helvetica", "Helvetica Neue",  "Arial", sans-serif;
+  font-size:90%;
+  color: black;
+}
+
+p {
+  margin: 0.5em;
+}
+
+pre code {
+  font-family: "Monaco";
+  font-size: 100%;
+}
+
+img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin:10px;
+}
+
+h1, h2, h3 {
+  border-bottom:thin solid black;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+}
+
+h1 {
+  font-style:italic;
+  font-size:130%;
+}
+
+h2 {
+  font-size:110%;
+}
+
+h3 {
+  font-size:100%;
+}
+
+
+
+      
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  background: white;
+  text-align: right;
+}
+.content {
+  flex: 1;
+  overflow: auto;
+}
+
+
+
+    </style>
+  </head>
+
+  
+  
+
+  <div class="ui fixed top pointing inverted stackable menu labmenu">
+    <header class="header item">
+      <i id="toc" class="sitemap icon"></i>
+      
+        <a href="../index.html"> Git Workshop  </a>
+      
+    </header>
+    <div class="right tab-menu menu">
+      
+        <a class="item" data-tab="08: Tagging">
+          08: Tagging
+        </a>
+      
+        <a class="item" data-tab="Practical">
+          Practical
+        </a>
+      
+    </div>
+  </div>
+
+
+  
+
+  <div class="ui pushable">
+    <div class="ui inverted labeled icon left inline vertical sidebar menu">
+      <br><br>
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-01/index.html">01: Commits </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-02/index.html">02: Branches </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-03/index.html">03: Merging </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-04/index.html">04: Conflicts </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-05/index.html">05: Rundown </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-06/index.html">06: GitHub </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-07/index.html">07: Rebasing </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-08/index.html">08: Tagging </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-09/index.html">09: Cherry Picking </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-10/index.html">10: Stashing </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-11/index.html">11: Hooks </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-12/index.html">12: Config </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-13/index.html">13: Bisecting </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/book-14/index.html">14: Under the Covers </a>
+          
+        
+      
+    </div>
+    <div class="pusher" tabindex="-1">
+      <div class="ui basic segment">
+        <br>
+        
+          <div class="ui tab segment lab" data-tab="08: Tagging">
+            <h1>Tagging</h1>
+<p>Tags are like branches, except they don&#39;t usually change</p>
+<p>There are two types of git tags - annotated and lightweight</p>
+<ul>
+<li>We’re going to only cover lightweight tags today (you’ll see these more often)</li>
+<li>A lightweight tag is like a branch that does not change<ul>
+<li>Pointer to a specific git-ref.</li>
+<li>Unlike annotated tags, it is not a full object in the Git DB (not annotated, not-checksummed, not signed, no metadata about the creator)</li>
+</ul>
+</li>
+<li>Lightweight tags - under the covers</li>
+</ul>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Practical">
+            <h1>Practical</h1>
+<h2>Prerequisite</h2>
+<p>Ensure your current directory is that of the cloned repository in the previous practical.</p>
+<h2>Creating a tag</h2>
+<pre><code class="lang-bash"># On a branch or any kind of git-ref
+git tag v1.2.3-your-name
+
+# Check filesystem (ls .git/refs/tags)
+# Git does not push tags by default to a remote
+# Or `git push --tags`
+git push origin v1.2.3-your-name</code></pre>
+<p>Now create another tag <em>v99.0.0</em> before moving onto the next part</p>
+<pre><code class="lang-bash"># Checkout a tag
+git checkout v99.0.0
+
+# Create a branch from a tag
+git checkout -b version-nine-nine v99.0.0
+
+# Delete tags /!\ Careful now  /!\
+# Local only
+git tag -d v99.0.0
+
+# Delete from remote
+git push origin :refs/tags/v99.0.0
+
+# A little bit about annotated tags
+git tag -s v0.99.0-annotated -m &quot;my tag v0.99.0-annotated&quot;
+git show v0.99.0-annotated</code></pre>
+<h2>Viewing a tag</h2>
+<pre><code class="lang-bash"># LW tags are files on disk with a pointer to a commit
+ls .git/refs/tags/
+
+# Cat to reveal pointer to a commit
+cat git/refs/tags/v99.0.0
+
+# Show this commit
+git show 659220</code></pre>
+
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <br>
+  <script>
+    $(document).on('keydown', function(e) {
+  e = e || window.event;
+  var nextTab;
+  switch (e.which || e.keyCode) {
+    case 37: // left
+      nextTab = $('.tab-menu a[data-tab].active').prev('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').last();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+
+    case 39: // right
+      nextTab = $('.tab-menu a[data-tab].active').next('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').first();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+  }
+});
+
+    $(document).ready(function() {
+  $('img').addClass('ui image');
+
+  $('.ui.embed').embed();
+
+  const $images = $('.lab img');
+  jQuery.each($images, function(i) {
+    if ($images[i].alt.length > 0) {
+      const divImg = $(document.createElement('div')).addClass(
+        'ui basic segment',
+      );
+      $($images[i]).wrap(divImg);
+      const divLabel = $(document.createElement('div')).addClass(
+        'ui blue ribbon label',
+      );
+      divLabel.append($images[i].alt);
+      $(divLabel).insertBefore($images[i]);
+    }
+  });
+
+  $('.ui.menu .item').tab({
+    history: true,
+    historyType: 'hash',
+  });
+
+  $('.popup').popup();
+
+  $('.ui.sidebar')
+    .sidebar({ context: $('.pushable') })
+    .sidebar('setting', 'transition', 'slide out')
+    .sidebar('attach events', '#toc');
+});
+
+  </script>
+
+
+
+  <div class="ui bottom fixed borderless right menu">
+    <div class="ui right small menu">
+      <div class="ui tiny basic message segment">
+         Powered by <a href="https://github.com/edeleastar/tutors-ts">tutors-ts.</a> 
+      </div>
+    </div>
+  </div>
+
+  </body>
+
+</html>

@@ -1,0 +1,35 @@
+
+
+
+  {
+  
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "07: Rebasing",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>Time to rewrite history</p>",
+  "folder" : "book-07",
+  "link" : "index.html",
+  "los": [
+   ]
+,
+  "chapters" : [
+  
+    {
+    "title": "# Rebasing",
+    "shortTitle": "07: Rebasing",
+    "contentMd" : "# Rebasing\n\nTime to rewrite history\n\n# Overview\n\nWhy rewrite history?\n\n* Git is not only a source control tool, it is also a communication tool\n    * Order of commits, logical grouping, good commit messages help to communicate changes\n    * Think of the person reviewing your PRs as a potential axe-murderer. Axe murderers hate fix-up commits.\n* Golden rule: Never rewrite history on shared/public branches\n\n# Visualise\n\nRebasing and Merging are two methods that achieve the same goal - the integration of changes from one branch into another branch\n\n\n![rebase on master](img/01.gif)\n![rebase on feature](img/02.gif)\n"
+    },
+  
+    {
+    "title": "# Prerequisites",
+    "shortTitle": "Practical",
+    "contentMd" : "# Prerequisites\n\n* Git (2.x)\n* (Optional) hub - https://github.com/github/hub\n* Fork the repository from https://github.com/feedhenry/git-tutorial\n\n```bash\n# Clone the forked repository\ngit clone git@github.com:<github_username>/git-tutorial.git\n```\n\n# Practical\n\n```bash\ncd git-tutorial # From earlier\ngit fetch\ngit checkout rebase\n\n# The rebase branch was branched from master a while ago\n# It's out of date (master has moved on)\n# And there's bad commits in our history that we're going to fixup\ngit log --pretty=oneline\n\n# First, lets interactively rebase our last 4 commits\ngit rebase -i HEAD~4 # Note the lack of a branch\n\n# Fix up the commits - think about re-ordering or (s)quashing\n# the version bumps and (r)eword the commit messages.\n# Also, delete commits that are of no value\ngit rebase origin/master\n\n# Alternatively:\n# We can do both a history rewrite and a rebase via:\ngit rebase -i origin/master\n```\n"
+    }
+  
+  ]
+  }
+

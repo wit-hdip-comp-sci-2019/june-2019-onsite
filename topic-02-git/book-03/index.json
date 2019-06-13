@@ -1,0 +1,41 @@
+
+
+
+  {
+  
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "03: Merging",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>Like road merging but for branches</p>",
+  "folder" : "book-03",
+  "link" : "index.html",
+  "los": [
+   ]
+,
+  "chapters" : [
+  
+    {
+    "title": "# Merging",
+    "shortTitle": "03: Merging",
+    "contentMd" : "# Merging\n\nLike road merging but for branches\n\nIn the last section, we learned about creating new branches. Often branches are\ncreated temporarily to work on a specific piece of work. When that work is\nready, then those changes are brought back into the main line again.\n\nRemember the branches from the last section? Originally there was the master\nbranch, and then we created a branch called 'favourite-animal', where we made\nchanges. We can now merge those changes back into master branch, and delete the\n'my-new-branch' since we won't need it anymore.\n"
+    },
+  
+    {
+    "title": "# Practical One - Fast-forward merging",
+    "shortTitle": "Practical 1",
+    "contentMd" : "# Practical One - Fast-forward merging\n\nThe simplest form of merging is *fast-forward* merging. Since branches are just\nreferences to commits, and 'favourite-animal' is a direct descendant of master;\nwe can just update master to point to the same commit as 'favourite-animal'.\n\nThis is the default way that git will merge when the target branch is an\nancestor of the source branch. First, `checkout` the target branch (master in\nthis case), and then use the `merge` subcommand to bring the changes from the\nsource branch (favourite-animal) into this branch:\n\n```bash\ngit checkout master\n\ngit merge favourite-animal\n```\n\nMaster and the 'favourite-animal' branch are now pointing at the same commit.\nWe can delete the 'favourite-animal' branch.\n\n```bash\ngit branch -d favourite-animal\n```\n"
+    },
+  
+    {
+    "title": "# Practial Two - Merge commits",
+    "shortTitle": "Practical 2",
+    "contentMd" : "# Practial Two - Merge commits\n\nIn some cases, the target branch will not be a direct ancestor of the source\nbranch. This is the case for our 'favourite-show' branch. Here, the default\naction is to create a new commit which has two (or more) *parent* commits and a\nmessage.\n\n![Before creating a merge commit](./img/basic-merging-before.png)\n\nWhile on the master branch, we can now merge the changes from the\n'favourite-show' branch as follows:\n\n``` bash\ngit merge favourite-show\n```\n\nThe default commit message editor will have appeared here, to give you the\nopportunity to modify the commit message for the new commit. The default is\nusually fine.\n\n![After creating a merge commit](./img/basic-merging-after.png)\n\nUsually a *merge commit* will not contain any changes to files itself. The\nchanges will be in its ancestors. Sometimes when merging two divergent branches\nthough, there will be conflicting changes on either side of the merge. In this\ncase, there may be changes needed in the merge commit to resolve the conflicts.\n\nIt is worth checking the log here to see the commit history.\n``` bash\ngit log\n```\n"
+    }
+  
+  ]
+  }
+
