@@ -1,0 +1,29 @@
+
+
+
+  {
+  
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "05: Rundown",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>A recap of some core concepts we have already covered</p>",
+  "folder" : "book-05",
+  "link" : "index.html",
+  "los": [
+   ]
+,
+  "chapters" : [
+  
+    {
+    "title": "# (Rundown) Saving Changes and Branching",
+    "shortTitle": "05: Rundown",
+    "contentMd" : "# (Rundown) Saving Changes and Branching\n\nA recap of some core concepts we have already covered\n\n## Saving\n\nSaving changes is a two-step process in Git:\n\n```bash\n# Stages changes to the staging area\ngit add <files>\n\n# Commits a snapshot of changes to the local repo\ngit commit\n```\n\n## Adding\n\n* Adds changes to the staging area\n* Does not really affect the working tree\n* Changes are not recorded until committed\n\n```bash\n# Add just these file(s)\ngit add app.js\n\n# Add all changed files in this directory and sub-dirs\ngit add .\n\n# Glob and stage a pattern of files\ngit add **/*.js\n\n# Unstage the changes to app.js\ngit reset app.js\n```\n\n## Committing\n\n* Commits the staged snapshot to the local repository\n* Include a meaningful commit message\n* Logically group your changes into separate commits\n\n```bash\n# Commits the staged snapshot - will open editor for a message\ngit commit\n\n# Commits with a message\ngit commit -m \"Make a meaningful change\"\n```\n\nTwofer - commit and add in one command:\n\n```bash\n# Stage & commit all changed files with a message\ngit commit -am \"FH-12345 - My files on disk are perfect\"\n```\n\n## Branching\n\nA branch in git is simply a reference to a commit\n\n```bash\n# List all local branches\ngit branch\n\n# Create a new branch locally\ngit branch mynewbranch [myoptionalbasebranch]\n\n# What commit is a branch pointing at?\ngit rev-parse mynewbranch\n\n# What commits are on a branch?\ngit log mynewbranch [--pretty --graph --oneline --decorate]\n\n# What branches point at a particular commit?\ngit branch --points-at e29b7ee\n\n# Delete a branch\ngit branch -d mynewbranch\n\n# Really delete a branch, even if it has changes that aren't on any other branches\ngit branch -D mynewbranch\n```\n\nThere are also \"remote-tracking\" branches\nThese are read-only copies of what is on a \"remote\", at the time that we last \"fetched\" (updated the information we store locally about branches on the remote).\n\n```bash\n# Get new information from all remotes\ngit remote update [--prune] # or: git fetch --all [--prune]\n\n# List all remote-tracking branches\ngit branch -r\n\n# List all branches (local and remote-tracking)\ngit branch -a\n\n# Track a remote branch\ngit branch [branchname] -u origin/anybranch\n\n# Now status will show the relationship with\ngit status [-sb]\nstdout: \"Your branch is ahead of 'origin/anybranch' by 3 commits\"\n\n# Delete a branch from a remote\ngit push origin --delete mybranchname\n```\n"
+    }
+  
+  ]
+  }
+

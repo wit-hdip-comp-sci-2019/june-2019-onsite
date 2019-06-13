@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css"
+          type="text/css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css"
+          rel="stylesheet"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <style>
+      
+
+body {
+  font-family: "Open Sans", "Helvetica", "Helvetica Neue",  "Arial", sans-serif;
+  font-size:90%;
+  color: black;
+}
+
+p {
+  margin: 0.5em;
+}
+
+pre code {
+  font-family: "Monaco";
+  font-size: 100%;
+}
+
+img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin:10px;
+}
+
+h1, h2, h3 {
+  border-bottom:thin solid black;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+}
+
+h1 {
+  font-style:italic;
+  font-size:130%;
+}
+
+h2 {
+  font-size:110%;
+}
+
+h3 {
+  font-size:100%;
+}
+
+
+
+      
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  background: white;
+  text-align: right;
+}
+.content {
+  flex: 1;
+  overflow: auto;
+}
+
+
+
+    </style>
+  </head>
+
+  
+  
+
+  <div class="ui fixed top pointing inverted stackable menu labmenu">
+    <header class="header item">
+      <i id="toc" class="sitemap icon"></i>
+      
+        <a href="../../index.html"> Digging Deeper  </a>
+      
+    </header>
+    <div class="right tab-menu menu">
+      
+        <a class="item" data-tab="05: Rundown">
+          05: Rundown
+        </a>
+      
+    </div>
+  </div>
+
+
+  
+
+  <div class="ui pushable">
+    <div class="ui inverted labeled icon left inline vertical sidebar menu">
+      <br><br>
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-2/book-01/index.html">01: Commits </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-2/book-02/index.html">02: Branches </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-2/book-03/index.html">03: Merging </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-3/book-04/index.html">04: Conflicts </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-3/book-05/index.html">05: Rundown </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-3/book-06/index.html">06: GitHub </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-3/book-07/index.html">07: Rebasing </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-4/book-08/index.html">08: Tagging </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-4/book-09/index.html">09: Cherry Picking </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-4/book-10/index.html">10: Stashing </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-5/book-11/index.html">11: Hooks </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-5/book-12/index.html">12: Config </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-5/book-13/index.html">13: Bisecting </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-5/book-14/index.html">14: Under the Covers </a>
+          
+        
+      
+    </div>
+    <div class="pusher" tabindex="-1">
+      <div class="ui basic segment">
+        <br>
+        
+          <div class="ui tab segment lab" data-tab="05: Rundown">
+            <h1>(Rundown) Saving Changes and Branching</h1>
+<p>A recap of some core concepts we have already covered</p>
+<h2>Saving</h2>
+<p>Saving changes is a two-step process in Git:</p>
+<pre><code class="lang-bash"># Stages changes to the staging area
+git add &lt;files&gt;
+
+# Commits a snapshot of changes to the local repo
+git commit</code></pre>
+<h2>Adding</h2>
+<ul>
+<li>Adds changes to the staging area</li>
+<li>Does not really affect the working tree</li>
+<li>Changes are not recorded until committed</li>
+</ul>
+<pre><code class="lang-bash"># Add just these file(s)
+git add app.js
+
+# Add all changed files in this directory and sub-dirs
+git add .
+
+# Glob and stage a pattern of files
+git add **/*.js
+
+# Unstage the changes to app.js
+git reset app.js</code></pre>
+<h2>Committing</h2>
+<ul>
+<li>Commits the staged snapshot to the local repository</li>
+<li>Include a meaningful commit message</li>
+<li>Logically group your changes into separate commits</li>
+</ul>
+<pre><code class="lang-bash"># Commits the staged snapshot - will open editor for a message
+git commit
+
+# Commits with a message
+git commit -m &quot;Make a meaningful change&quot;</code></pre>
+<p>Twofer - commit and add in one command:</p>
+<pre><code class="lang-bash"># Stage &amp; commit all changed files with a message
+git commit -am &quot;FH-12345 - My files on disk are perfect&quot;</code></pre>
+<h2>Branching</h2>
+<p>A branch in git is simply a reference to a commit</p>
+<pre><code class="lang-bash"># List all local branches
+git branch
+
+# Create a new branch locally
+git branch mynewbranch [myoptionalbasebranch]
+
+# What commit is a branch pointing at?
+git rev-parse mynewbranch
+
+# What commits are on a branch?
+git log mynewbranch [--pretty --graph --oneline --decorate]
+
+# What branches point at a particular commit?
+git branch --points-at e29b7ee
+
+# Delete a branch
+git branch -d mynewbranch
+
+# Really delete a branch, even if it has changes that aren&#39;t on any other branches
+git branch -D mynewbranch</code></pre>
+<p>There are also &quot;remote-tracking&quot; branches
+These are read-only copies of what is on a &quot;remote&quot;, at the time that we last &quot;fetched&quot; (updated the information we store locally about branches on the remote).</p>
+<pre><code class="lang-bash"># Get new information from all remotes
+git remote update [--prune] # or: git fetch --all [--prune]
+
+# List all remote-tracking branches
+git branch -r
+
+# List all branches (local and remote-tracking)
+git branch -a
+
+# Track a remote branch
+git branch [branchname] -u origin/anybranch
+
+# Now status will show the relationship with
+git status [-sb]
+stdout: &quot;Your branch is ahead of &#39;origin/anybranch&#39; by 3 commits&quot;
+
+# Delete a branch from a remote
+git push origin --delete mybranchname</code></pre>
+
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <br>
+  <script>
+    $(document).on('keydown', function(e) {
+  e = e || window.event;
+  var nextTab;
+  switch (e.which || e.keyCode) {
+    case 37: // left
+      nextTab = $('.tab-menu a[data-tab].active').prev('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').last();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+
+    case 39: // right
+      nextTab = $('.tab-menu a[data-tab].active').next('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').first();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+  }
+});
+
+    $(document).ready(function() {
+  $('img').addClass('ui image');
+
+  $('.ui.embed').embed();
+
+  const $images = $('.lab img');
+  jQuery.each($images, function(i) {
+    if ($images[i].alt.length > 0) {
+      const divImg = $(document.createElement('div')).addClass(
+        'ui basic segment',
+      );
+      $($images[i]).wrap(divImg);
+      const divLabel = $(document.createElement('div')).addClass(
+        'ui blue ribbon label',
+      );
+      divLabel.append($images[i].alt);
+      $(divLabel).insertBefore($images[i]);
+    }
+  });
+
+  $('.ui.menu .item').tab({
+    history: true,
+    historyType: 'hash',
+  });
+
+  $('.popup').popup();
+
+  $('.ui.sidebar')
+    .sidebar({ context: $('.pushable') })
+    .sidebar('setting', 'transition', 'slide out')
+    .sidebar('attach events', '#toc');
+});
+
+  </script>
+
+
+
+  <div class="ui bottom fixed borderless right menu">
+    <div class="ui right small menu">
+      <div class="ui tiny basic message segment">
+         Powered by <a href="https://github.com/edeleastar/tutors-ts">tutors-ts.</a> 
+      </div>
+    </div>
+  </div>
+
+  </body>
+
+</html>

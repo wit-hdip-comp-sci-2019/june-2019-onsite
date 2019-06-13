@@ -1,0 +1,41 @@
+
+
+
+  {
+  
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "04: Conflicts",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>What are conflicts, and how do they happen?</p>",
+  "folder" : "book-04",
+  "link" : "index.html",
+  "los": [
+   ]
+,
+  "chapters" : [
+  
+    {
+    "title": "# Conflicts",
+    "shortTitle": "04: Conflicts",
+    "contentMd" : "# Conflicts\n\nWhat are conflicts, and how do they happen?\n\nConflicts in git occur when trying to integrate changes from two different\nstates, where different changes are made in one place. The most common case is\nwhen performing a *merge* of one branch into another, where there's a change to\na particular line in a particular file on both sides of the merge.\n\nGit doesn't know what to do automatically, so it just stops in the middle of\nthe action, and asks you to intervene.\n"
+    },
+  
+    {
+    "title": "# Practical One",
+    "shortTitle": "Practical",
+    "contentMd" : "# Practical One\n\nFirst, let's make a new branch and add a file:\n\n``` bash\ngit checkout -b left master\n\necho \"Left is the best\" > conflict.txt\n\ngit add conflict.txt\ngit commit -m \"Left is the best\"\n```\n\nNext, for the purposes of demonstration, let's create another branch,\ncalled `right`:\n\n```bash\ngit checkout -b right master\n\necho \"Right is the best\" > conflict.txt\ngit add conflict.txt\ngit commit -m \"Right is the best\"\n```\n\nWe've made changes here in the same file, in two separate\nbranches. If we try to integrate these branches with a merge,\nwe're going to see a conflict. Let's merge `the-left` into\n`the-right` to see a conflict:\n\n```bash\ngit merge left\n```\n\nWe now are told that there has been a conflict while perfoming the merge. Git\nhas stopped the merge process and asked us to resolve the conflict before\ncontinuing. We can check the status of our repo to see the unmerged paths and\ninstructions on how to resolve the conflict.\n\n```bash\ngit status\n```\n\nLet's open 'conflict.txt' in an editor and go through how to resolve a\nconflict. This is the content of our file:\n\n```\n<<<<<<< HEAD\nRight is the best\n=======\nLeft is the best\n>>>>>>> left\n```\n\nWhat are the components of this block? This block is saying that the version of\nthe change in HEAD (right branch) is above the '=======' and everything below\nit is the change in the branch named 'left'. We can choose to keep one of these\nchanges, keep both, or change the content to something different.\n\nLet's update the contents of the file to:\n\n```\nRight and Left are both equally good\n```\n\nWith our conflict manually resolved, we need to `git add`:\n\n```\n# Stage our change and mark conflict as resolved\ngit add conflict.txt\n```\n\nLets check our `git status` once more.\n\n```bash\ngit status\n```\n\nIt tells us that all the conflicts have been resolved, but we are still in the\nmerging process. Finally, commit the integrated change. This will prompt for a\ncommit message. Leaving the default message is fine.\n\n```bash\ngit commit\n```\n"
+    },
+  
+    {
+    "title": "# Diving deeper",
+    "shortTitle": "Diving Deeper",
+    "contentMd" : "# Diving deeper\n\n## Aborting a merge\n\nWe can abort a merge that's in progress by using the `git merge --abort`\ncommand.\n\n## Minimising merge conflicts\n\nTo minimise merge conflicts keep commits small and integrate changes often.\n"
+    }
+  
+  ]
+  }
+

@@ -1,0 +1,29 @@
+
+
+
+  {
+  
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "06: GitHub",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>GitHub is an online service to help people work together on projects</p>",
+  "folder" : "book-06",
+  "link" : "index.html",
+  "los": [
+   ]
+,
+  "chapters" : [
+  
+    {
+    "title": "# GitHub",
+    "shortTitle": "06: GitHub",
+    "contentMd" : "# GitHub\n\nGitHub is an online service to help people work together on projects\n\nLet's look at a repository:\n\nhttps://github.com/wit-hdip-comp-sci-2019/june-onsite-src\n\nLet's go explore a little. Notice that the main features are based\naround concepts that we've already looked at.\n\n# Alternatives to GitHub\n\nThere are many alternatives to GitHub, but like other social network\nscenarios, they suffer a bit from the \"network effects\" of\nGitHub. Here are 3 examples:\n\n- Pagure: https://pagure.io/\n- Gitlab: https://about.gitlab.com/\n- Bitbucket: https://bitbucket.org/\n\n# GitHub Pull Requests\n\nPull Requests are the \"killer feature\" of GitHub. You create a \"Pull\nRequest\" in a repository when you have changes on one branch (usually\nin a different copy of the repository) that you want to have merged\ninto another branch. The owner or other maintainers can then review\nyour changes, give you feedback, and hopefully eventually merge it.\n\nThis and other features in GitHub make it like a social network for\nfree and open source software projects.\n"
+    }
+  
+  ]
+  }
+

@@ -1,0 +1,35 @@
+
+
+
+  {
+  
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "09: Cherry Picking",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>Selectively take the changes from a particular commit on a different branch</p>",
+  "folder" : "book-09",
+  "link" : "index.html",
+  "los": [
+   ]
+,
+  "chapters" : [
+  
+    {
+    "title": "# Cherry Picking",
+    "shortTitle": "09: Cherry Picking",
+    "contentMd" : "# Cherry Picking\n\nSelectively take the changes from a particular commit on a different branch\n"
+    },
+  
+    {
+    "title": "Our main use-case for git-cherry-pick is for taking some bugfix",
+    "shortTitle": "Practical",
+    "contentMd" : "Our main use-case for git-cherry-pick is for taking some bugfix\ncommits from one branch, and applying them to another (e.g. a release\nbranch and master)\n\n```bash\n# Ensure that you're on the branch you want to copy commits to\n# and the working directory is clean\n$ git status\nOn branch cp-example\nnothing to commit, working tree clean\n\n# Bring a commit from a different branch over\ngit cherry-pick 897a3db\n\n# Notice that the changes, author details, and commit message are the same\n# But the commit sha1 is different (and maybe the tree object)\n$ git log -1 # or git show\ncommit 240881944b4da840e3893742b68a17c5230a6717 (HEAD -> cp-example)\nAuthor: Jenkins <jenkins@everbuild.feedhenry.net>\nDate:   Thu Dec 1 17:12:24 2016 +0000\n\n    Bumping version to 2.0.1\n```\n"
+    }
+  
+  ]
+  }
+

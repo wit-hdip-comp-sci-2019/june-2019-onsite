@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css"
+          type="text/css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css"
+          rel="stylesheet"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <style>
+      
+
+body {
+  font-family: "Open Sans", "Helvetica", "Helvetica Neue",  "Arial", sans-serif;
+  font-size:90%;
+  color: black;
+}
+
+p {
+  margin: 0.5em;
+}
+
+pre code {
+  font-family: "Monaco";
+  font-size: 100%;
+}
+
+img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin:10px;
+}
+
+h1, h2, h3 {
+  border-bottom:thin solid black;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+}
+
+h1 {
+  font-style:italic;
+  font-size:130%;
+}
+
+h2 {
+  font-size:110%;
+}
+
+h3 {
+  font-size:100%;
+}
+
+
+
+      
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  background: white;
+  text-align: right;
+}
+.content {
+  flex: 1;
+  overflow: auto;
+}
+
+
+
+    </style>
+  </head>
+
+  
+  
+
+  <div class="ui fixed top pointing inverted stackable menu labmenu">
+    <header class="header item">
+      <i id="toc" class="sitemap icon"></i>
+      
+        <a href="../../index.html"> Digging Deeper  </a>
+      
+    </header>
+    <div class="right tab-menu menu">
+      
+        <a class="item" data-tab="07: Rebasing">
+          07: Rebasing
+        </a>
+      
+        <a class="item" data-tab="Practical">
+          Practical
+        </a>
+      
+    </div>
+  </div>
+
+
+  
+
+  <div class="ui pushable">
+    <div class="ui inverted labeled icon left inline vertical sidebar menu">
+      <br><br>
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-2/book-01/index.html">01: Commits </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-2/book-02/index.html">02: Branches </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-2/book-03/index.html">03: Merging </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-3/book-04/index.html">04: Conflicts </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-3/book-05/index.html">05: Rundown </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-3/book-06/index.html">06: GitHub </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-3/book-07/index.html">07: Rebasing </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-4/book-08/index.html">08: Tagging </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-4/book-09/index.html">09: Cherry Picking </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-4/book-10/index.html">10: Stashing </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-5/book-11/index.html">11: Hooks </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-5/book-12/index.html">12: Config </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-5/book-13/index.html">13: Bisecting </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-hdip-comp-sci-2019.github.io/june-2019-onsite//topic-02-git/unit-5/book-14/index.html">14: Under the Covers </a>
+          
+        
+      
+    </div>
+    <div class="pusher" tabindex="-1">
+      <div class="ui basic segment">
+        <br>
+        
+          <div class="ui tab segment lab" data-tab="07: Rebasing">
+            <h1>Rebasing</h1>
+<p>Time to rewrite history</p>
+<h1>Overview</h1>
+<p>Why rewrite history?</p>
+<ul>
+<li>Git is not only a source control tool, it is also a communication tool<ul>
+<li>Order of commits, logical grouping, good commit messages help to communicate changes</li>
+<li>Think of the person reviewing your PRs as a potential axe-murderer. Axe murderers hate fix-up commits.</li>
+</ul>
+</li>
+<li>Golden rule: Never rewrite history on shared/public branches</li>
+</ul>
+<h1>Visualise</h1>
+<p>Rebasing and Merging are two methods that achieve the same goal - the integration of changes from one branch into another branch</p>
+<p><img src="img/01.gif" alt="rebase on master">
+<img src="img/02.gif" alt="rebase on feature"></p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Practical">
+            <h1>Prerequisites</h1>
+<ul>
+<li>Git (2.x)</li>
+<li>(Optional) hub - <a href="https://github.com/github/hub">https://github.com/github/hub</a></li>
+<li>Fork the repository from <a href="https://github.com/feedhenry/git-tutorial">https://github.com/feedhenry/git-tutorial</a></li>
+</ul>
+<pre><code class="lang-bash"># Clone the forked repository
+git clone git@github.com:&lt;github_username&gt;/git-tutorial.git</code></pre>
+<h1>Practical</h1>
+<pre><code class="lang-bash">cd git-tutorial # From earlier
+git fetch
+git checkout rebase
+
+# The rebase branch was branched from master a while ago
+# It&#39;s out of date (master has moved on)
+# And there&#39;s bad commits in our history that we&#39;re going to fixup
+git log --pretty=oneline
+
+# First, lets interactively rebase our last 4 commits
+git rebase -i HEAD~4 # Note the lack of a branch
+
+# Fix up the commits - think about re-ordering or (s)quashing
+# the version bumps and (r)eword the commit messages.
+# Also, delete commits that are of no value
+git rebase origin/master
+
+# Alternatively:
+# We can do both a history rewrite and a rebase via:
+git rebase -i origin/master</code></pre>
+
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <br>
+  <script>
+    $(document).on('keydown', function(e) {
+  e = e || window.event;
+  var nextTab;
+  switch (e.which || e.keyCode) {
+    case 37: // left
+      nextTab = $('.tab-menu a[data-tab].active').prev('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').last();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+
+    case 39: // right
+      nextTab = $('.tab-menu a[data-tab].active').next('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').first();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+  }
+});
+
+    $(document).ready(function() {
+  $('img').addClass('ui image');
+
+  $('.ui.embed').embed();
+
+  const $images = $('.lab img');
+  jQuery.each($images, function(i) {
+    if ($images[i].alt.length > 0) {
+      const divImg = $(document.createElement('div')).addClass(
+        'ui basic segment',
+      );
+      $($images[i]).wrap(divImg);
+      const divLabel = $(document.createElement('div')).addClass(
+        'ui blue ribbon label',
+      );
+      divLabel.append($images[i].alt);
+      $(divLabel).insertBefore($images[i]);
+    }
+  });
+
+  $('.ui.menu .item').tab({
+    history: true,
+    historyType: 'hash',
+  });
+
+  $('.popup').popup();
+
+  $('.ui.sidebar')
+    .sidebar({ context: $('.pushable') })
+    .sidebar('setting', 'transition', 'slide out')
+    .sidebar('attach events', '#toc');
+});
+
+  </script>
+
+
+
+  <div class="ui bottom fixed borderless right menu">
+    <div class="ui right small menu">
+      <div class="ui tiny basic message segment">
+         Powered by <a href="https://github.com/edeleastar/tutors-ts">tutors-ts.</a> 
+      </div>
+    </div>
+  </div>
+
+  </body>
+
+</html>

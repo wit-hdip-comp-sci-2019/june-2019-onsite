@@ -98,6 +98,19 @@
   
     "properties" : {},
   
+  "type" : "unit",
+  "title" : "Overview ",
+  "img" : "talk-1/git.png",
+  "videoid" : "",
+  "objectives" : "<p>Overview</p>",
+  "folder" : "unit-1",
+  "link" : "index.html",
+  "los": [
+   {
+    
+  
+    "properties" : {},
+  
   "type" : "talk",
   "title" : "Git Cheat Sheet ",
   "img" : "git.png",
@@ -125,6 +138,38 @@
    ]
 
     } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "web",
+  "title" : "Github Education ",
+  "img" : "web.png",
+  "videoid" : "",
+  "objectives" : "<p>GitHub Education helps students, teachers, and schools access the tools and events they need to shape the next generation of software development.</p>",
+  "folder" : "web",
+  "link" : "https://education.github.com/",
+  "los": [
+   ]
+
+    } 
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "unit",
+  "title" : "Basics ",
+  "img" : "book-01/img/main.png",
+  "videoid" : "",
+  "objectives" : "<p>Basics</p>",
+  "folder" : "unit-2",
+  "link" : "index.html",
+  "los": [
    {
     
   
@@ -172,7 +217,23 @@
   "los": [
    ]
 
+    } 
+   ]
+
     } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "unit",
+  "title" : "Digging Deeper ",
+  "img" : "book-04/img/main.png",
+  "videoid" : "",
+  "objectives" : "<p>Digging Deeper</p>",
+  "folder" : "unit-3",
+  "link" : "index.html",
+  "los": [
    {
     
   
@@ -236,7 +297,23 @@
   "los": [
    ]
 
+    } 
+   ]
+
     } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "unit",
+  "title" : "Organizing Repos ",
+  "img" : "book-08/img/main.png",
+  "videoid" : "",
+  "objectives" : "<p>Organizing Repos</p>",
+  "folder" : "unit-4",
+  "link" : "index.html",
+  "los": [
    {
     
   
@@ -284,7 +361,23 @@
   "los": [
    ]
 
+    } 
+   ]
+
     } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "unit",
+  "title" : "Advanced ",
+  "img" : "book-11/img/main.png",
+  "videoid" : "",
+  "objectives" : "<p>Advanced</p>",
+  "folder" : "unit-5",
+  "link" : "index.html",
+  "los": [
    {
     
   
@@ -348,20 +441,7 @@
   "los": [
    ]
 
-    } ,
-   {
-    
-  
-    "properties" : {},
-  
-  "type" : "web",
-  "title" : "Github Education ",
-  "img" : "web.png",
-  "videoid" : "",
-  "objectives" : "<p>GitHub Education helps students, teachers, and schools access the tools and events they need to shape the next generation of software development.</p>",
-  "folder" : "web",
-  "link" : "https://education.github.com/",
-  "los": [
+    } 
    ]
 
     } 

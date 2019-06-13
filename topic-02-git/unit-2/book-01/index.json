@@ -1,0 +1,47 @@
+
+
+
+  {
+  
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "01: Commits",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>The fundamental building blocks of Git</p>",
+  "folder" : "book-01",
+  "link" : "index.html",
+  "los": [
+   ]
+,
+  "chapters" : [
+  
+    {
+    "title": "# Commits",
+    "shortTitle": "01: Commits",
+    "contentMd" : "# Commits\n\nThe fundamental building blocks of Git\n\nA commit is a snapshot of a project at a specific point in time. Think of it as\na 'save point' in a video game. If you mess up your project you can go back to\na working commit.\n"
+    },
+  
+    {
+    "title": "# Practical One",
+    "shortTitle": "Practical 1",
+    "contentMd" : "# Practical One\n\n## Create a new repository\n\nBefore we create our first commit, we'll need to create a repository.\n\nCreate a new directory.\n\n```bash\nmkdir git-workshop\ncd git-workshop\n```\n\nInitialize a git repository, we will see a hidden `.git` directory created in\nthe current directory. Let's not focus on that too much at the moment.\n\n```bash\ngit init\n# stdout: Initialized empty Git repository in...\n\nls -a\n# stdout: .    ..   .git\n```\n\n## Create a commit\n\nWe have our repository created. Let's create a new file with some text inside\nit.\n\n```bash\necho 'Hello, World!' > hello.txt\n```\n\nWe can now add the `hello.txt` file to the staging area, ready to be committed.\nAny future changes to `hello.txt` will not be included in the commit we create,\nunless we add them too.\n\n```bash\ngit add hello.txt\n```\n\nFinally we can create a commit using the contents of the staging area, and\ninclude a descriptive message of our changes.\n\n```bash\n# Alternatively we can just do 'git commit', which will open up an editor to\n# enter the commit message.\ngit commit -m \"Add hello.txt\"\n```\n\nWe have created a commit, now let's create another one by making some changes\nto `hello.txt`. We'll leave this one to you, but our change could look\nsomething like:\n\n```bash\necho 'My name is <your-name>!' >> hello.txt\n```\n\n## Viewing commit history\n\nWe have two commits created, let's take a look at the commit log.\n\n```bash\n# To exit the log simply press 'q'\ngit log\n```\n\nThe commits are ordered in reverse chronological order. Each commit item\ncontains the SHA-1 hash of the commit, the author, the date the commit was\nauthored and the commit message. We can use the SHA-1 hash of the commit to\nreference it when using other git commands.\n\nFor example, we can *checkout* a commit:\n\n```bash\ngit checkout <commit-sha-1>\ncat hello.txt\n# stdout: Hello, World!\n\n# Use 'git checkout -' to checkout the previous commit.\ngit checkout -\ncat hello.txt\n# stdout: Hello, World! My name is <your-name>\n```\n"
+    },
+  
+    {
+    "title": "# Diving deeper",
+    "shortTitle": "Diving Deeper",
+    "contentMd" : "# Diving deeper\n\nWe covered quite a lot in the previous practical. Let's go in depth on some of\nthe topics covered.\n\n## Adding (Staging) and Committing\n\nWhen performing a *git add* we mentioned the \"staging area\". This is one of the\nthree sections of a git project:\n\n* The working directory - This is all the files in your current directory. This\nis where files are modified before being staged.\n\n* The staging area - This is where changes are added during *git add*, when a\ncommit is created the changes in the staging area will be the contents of the\ncommit.\n\n* The repository - Changes that have been committed and persisted.\n\n![Sections of a git project](./img/staging-and-comitting.png)\n\n## Lifecycle of files\n\nThere are two states of a file in git:\n\n* Tracked files - This is any file that is in the previous commit, or currently\nstaged.\n\n* Untracked files - Any file that is not a tracked file.\n\nA tracked file can be:\n\n* Modified: Changes have been made since the previous commit, but are not\nstaged.\n\n* Staged: Changes have been made since the previous commit, and those changes\nare staged.\n\n* Unmodified: No changes have been made to the file since the last commit.\n\n![File lifecycle](./img/file-lifecycle.png)\n"
+    },
+  
+    {
+    "title": "# Practical Two",
+    "shortTitle": "Practical 2",
+    "contentMd" : "# Practical Two\n\nNow we know a bit more about staging and the lifecycle of a file, let's have a\nlook at the lifecycle in action.\n\nFirst, let's create a new untracked file.\n\n```bash\necho 'My favourite colour is <your-favourite-colour>!' > colour.txt\n```\n\nNow we want to see the status of the current project.\n\n```bash\ngit status\n```\n\nIt tells us we have an untracked file called 'colour.txt'. As we haven't\nchanged the contents of 'hello.txt' it is unmodified and does not show by\ndefault.\n\nIf we `add` 'colour.txt' to the staging area and check the status again we will\nsee git is now telling us the file is staged or ready to be committed, the file\nis now also tracked.\n\n```bash\ngit add colour.txt\n\ngit status\n# Note that the output also tells us how to unstage the file, using git reset.\n```\n\nNow let's change the contents of 'hello.txt', the file will then become\nmodified and this will be shown when running `git status`.\n\n```bash\necho 'I am doing a Git workshop!' >> hello.txt\n\ngit status\n```\n\nFinally `add` and `commit` all of the changes.\n"
+    }
+  
+  ]
+  }
+

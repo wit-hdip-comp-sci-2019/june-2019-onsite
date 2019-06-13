@@ -1,0 +1,47 @@
+
+
+
+  {
+  
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "02: Branches",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>Branches make working with commits easier</p>",
+  "folder" : "book-02",
+  "link" : "index.html",
+  "los": [
+   ]
+,
+  "chapters" : [
+  
+    {
+    "title": "# Branches",
+    "shortTitle": "02: Branches",
+    "contentMd" : "# Branches\n\nBranches make working with commits easier\n\nA branch is just a reference to a commit, it has a human-readable name\nand identifier. Instead of using the SHA-1 hash to reference a commit we can\nnow use the name of a branch.\n\nWhen creating a repository using `git init` a branch named 'master' is created\nfor us, it is currently pointed at our latest commit.\n\n![The current state of our repository](./img/basic-branch.png)\n\nLet's designate 'master' as the branch for our main line of development,\nanything on that branch should be stable. If we want to test out new features\nwithout breaking the main line then we can create new branches.\n"
+    },
+  
+    {
+    "title": "# Practical One",
+    "shortTitle": "Practical 1",
+    "contentMd" : "# Practical One\n\nWe want to add a new file to our current project, but we don't want to mess up\n'master'.\n\n## View the current branches\n\nWe can see all of the branches in our repository.\n\n```bash\ngit branch\n# stdout: master\n```\n\n## Create a new branch from master\n\nTo add our new feature we want to add a new branch. Our new feature is adding\ninformation about our favourite animal so let's call the branch something\ndescriptive like 'favourite-animal'.\n\n```bash\ngit branch favourite-animal\n# If we do a 'git branch' now we'll see our new branch is created, but we're\n# still on master. Let's 'checkout' our new branch.\n\ngit checkout favourite-animal\n```\n\nNow that we have our branch created let's take a look at our commit history\nusing `git log`, this will give us information about what commit each branch is\ncurrently pointing to.\n\n## Make some changes\n\nLet's make some changes to our new branch and commit them.\n\n```bash\necho 'My favourite animal is a <your-favourite-animal>!' > animal.txt\n\ngit add animal.txt\ngit commit -m \"Add favourite animal\"\n```\n\nWe now have a repository that looks like this.\n\n![The new state of our repository](./img/two-branches.png)\n"
+    },
+  
+    {
+    "title": "# Diving deeper",
+    "shortTitle": "Diving Deeper",
+    "contentMd" : "# Diving deeper\n\n## Branches under the hood\n\nBranches are stored in the `.git/refs/heads` directory as files. If we view the\ncontents of any of these files they just contain the SHA-1 hash of the commit\nthe branch is currently pointing to.\n\n```bash\ncat .git/refs/heads/favourite-animal\n```\n\n## HEAD\n\nWhen we were doing `git log` you may have seen 'HEAD' mentioned in the log.\nHEAD points to whatever is currently checked out. At the moment we have the\n'favourite-animal' branch checked out so it will point to that. HEAD is a file\nin the `.git` directory.\n\n``` bash\ncat .git/HEAD\n# stdout: ref: refs/heads/favourite-animal\n```\n"
+    },
+  
+    {
+    "title": "# Practical Two",
+    "shortTitle": "Practical 2",
+    "contentMd" : "# Practical Two\n\nWe have created a branch that has information about our favourite animal. Now\nlet's create another branch from master and add information about our favourite\nTV show. We are currently on the branch 'favourite-animal'. We need to create\nour new branch from master.\n\n```bash\n# Create a new branch named favourite-show from the branch master\ngit branch favourite-show master\ngit checkout favourite-show\n```\n\nWe'll leave the rest to you.\n"
+    }
+  
+  ]
+  }
+
