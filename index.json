@@ -77,6 +77,150 @@
   "folder" : "topic-01-industry-talks",
   "link" : "index.html",
   "los": [
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : "Distilled  ",
+  "img" : "done-deal.png",
+  "videoid" : "none",
+  "objectives" : "<p>The leader in online marketplaces in Ireland, including donedeal, daft and adverts. <strong>Maeve Carey, Head of Biz Ops</strong></p>",
+  "folder" : "talk-01-done-deal",
+  "link" : "done-deal.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : "Dataworks ",
+  "img" : "dataworks.png",
+  "videoid" : "none",
+  "objectives" : "<p>Providing software solutions and validation services to clients in the Life Sciences Sector focusing on the Digital Transformation. <strong>Brian Robinson, CTO</strong></p>",
+  "folder" : "talk-02-dataworks",
+  "link" : "dataworks.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : "Fundrecs ",
+  "img" : "fundrecs.png",
+  "videoid" : "none",
+  "objectives" : "<p>Reconciliation software for the Global Funds Industry,  European Startup of the Year 2016, <strong>Padraig O&#39;Scanaill, Director/Founder</strong></p>",
+  "folder" : "talk-03-fundrecs",
+  "link" : "fundrecs.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : "ServiceBot ",
+  "img" : "servisbot.png",
+  "videoid" : "none",
+  "objectives" : "<p>Providing a Conversational Artificial Intelligence (AI) Platform for businesses to build natural language solutions. <strong>John Rellis, Team Lead</strong></p>",
+  "folder" : "talk-04-service-bot",
+  "link" : "servisbot.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : "Sunlife ",
+  "img" : "sun-life.png",
+  "videoid" : "none",
+  "objectives" : "<p>A leading global financial services organisation, provide a diverse range of wealth accumulation and insurance products. <strong>Shane McCormack, Director of Application Development</strong></p>",
+  "folder" : "talk-05-sunlife",
+  "link" : "sun-life.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : "SE2 ",
+  "img" : "SE2.png",
+  "videoid" : "none",
+  "objectives" : "<p>A recognized leader and one of the most innovative technology and third party administration companies in the annuity insurance industry. <strong>Ian McGoldrick, Solution Architect</strong></p>",
+  "folder" : "talk-06-se2",
+  "link" : "SE2.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : "Microchip ",
+  "img" : "micochip.png",
+  "videoid" : "none",
+  "objectives" : "<p>Semiconductor and system solutions across the microcontroller, analog, FPGA, connectivity and power management markets. <strong>Anton Krug, Embedded Development Engineer</strong></p>",
+  "folder" : "talk-07-microchip",
+  "link" : "micochip.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : "Scuri ",
+  "img" : "scuri.png",
+  "videoid" : "none",
+  "objectives" : "<p>Delivering a dynamic platform &amp; API designed for connecting &amp; optimising online ordering, shipping and delivery. <strong>Rory O’Connor, CEO</strong></p>",
+  "folder" : "talk-08-scuri",
+  "link" : "scuri.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : "VR Education ",
+  "img" : "vr.png",
+  "videoid" : "none",
+  "objectives" : "<p>A multi-award winning virtual/augmented reality (VR/AR) software firm dedicated to changing how educational content and corporate training are provided and consumed globally. <strong>Jonathan McDonald,  CTO</strong></p>",
+  "folder" : "talk-09-vr",
+  "link" : "vr.pdf",
+  "los": [
+   ]
+
+    } 
    ]
 
   },
