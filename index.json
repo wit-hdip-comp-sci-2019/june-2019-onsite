@@ -83,6 +83,22 @@
     "properties" : {},
   
   "type" : "talk",
+  "title" : "TSSG ",
+  "img" : "tssg.png",
+  "videoid" : "none",
+  "objectives" : "<p>An exploration of the world of Data Science in the context of the Internet of Things.</p>",
+  "folder" : "talk-00-tssg",
+  "link" : "tssg.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
   "title" : "Distilled  ",
   "img" : "done-deal.png",
   "videoid" : "none",
